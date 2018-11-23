@@ -10,20 +10,41 @@
 
 import PCF8591 as ADC
 import time
+import os
+
+timeBetweenMeasurements = 5
 voltage = 0
+ds18b20 = ''
 
 def setup():
 	ADC.setup(0x48)
+	global ds18b20
+	for i in os.listdir('sys/bus/w1/devices'):
+		if i != 'w1_bus_master1':
+			ds18b20 = i
+
+def readTemperature():
+#	global ds18b20
+	location = '/sys/bus/w1/devices/' + ds18b20 + '/w1_slave'
+	tfile = open(location)
+	text = tfile.read()
+	tfile.close()
+	secondline = text.split("\n")[1]
+	temperaturedata = secondline.split(" ")[9]
+	temperature = float(temperaturedata[2:])
+	temperature = temperature / 1000
+	return temperature
+
 
 def loop():
 	while True:
 		readAIN0 = ADC.read(0)
 		voltage = readAIN0/12.8 # More accurate near 12 V
 		print (voltage)
-		time.sleep(5)
+		if readTemperature() != None:
+			print ("Current temperature : %0.3f C" % readTemperature())
+		time.sleep(timeBetweenMeasurements)
 		
-
-
 def destroy():
 	ADC.write(0)
 
