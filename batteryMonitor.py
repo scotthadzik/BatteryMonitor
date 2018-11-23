@@ -15,10 +15,14 @@ voltage = 0
 def setup():
 	ADC.setup(0x48)
 
+def convertToVoltage(i2CData):
+	byteValue = int.from_bytes(i2CData, byteorder='little')
+	return byteValue
+
 def loop():
 	while True:
-		readAIN0 = ADC.read(0))
-		voltage = readAIN0
+		readAIN0 = ADC.read(0)
+		voltage = convertToVoltage(readAIN0)
 		print (voltage)
 		time.sleep(5)
 
