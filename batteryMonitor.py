@@ -9,6 +9,7 @@
 # print("Connected to Pi") # Added to Github
 
 import PCF8591 as ADC
+import time
 
 def setup():
 	ADC.setup(0x48)
@@ -17,6 +18,7 @@ def loop():
 	while True:
 		print (ADC.read(0))
 		ADC.write(ADC.read(0))
+        time.sleep(5)
 
 def destroy():
 	ADC.write(0)
