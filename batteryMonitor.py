@@ -15,24 +15,13 @@ voltage = 0
 def setup():
 	ADC.setup(0x48)
 
-def convertToVoltage(valueInBytes):
-	# byteValue = int.from_bytes(b'\x00\x10', byteorder='little')
-	byteValue = 0
-	for byte in valueInBytes:
-		byteValue = byteValue + int(byte)
-	return byteValue
-
 def loop():
 	while True:
 		readAIN0 = ADC.read(0)
-		print('reading is', readAIN0)
-		voltage = readAIN0/12.8
+		voltage = readAIN0/12.8 # More accurate near 12 V
 		print (voltage)
 		time.sleep(5)
-		# 154 is 12 V ~ 12.24
-		# 63  is 05 V ~ 23.27
-		# 36  is 3.3V ~ 26.55
-		# 0   is 0.0V ~ 31.00
+		
 
 
 def destroy():
