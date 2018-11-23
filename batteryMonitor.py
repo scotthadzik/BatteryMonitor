@@ -10,13 +10,16 @@
 
 import PCF8591 as ADC
 import time
+voltage = 0
 
 def setup():
 	ADC.setup(0x48)
 
 def loop():
 	while True:
-		print (ADC.read(0))
+		readAIN0 = ADC.read(0))
+		voltage = readAIN0
+		print (voltage)
 		time.sleep(5)
 
 def destroy():
