@@ -33,6 +33,7 @@ def readTemperature():
 	temperaturedata = secondline.split(" ")[9]
 	temperature = float(temperaturedata[2:])
 	temperature = temperature / 1000
+	temperature = (temperature* 9/5) + 32
 	return temperature
 
 
@@ -42,7 +43,7 @@ def loop():
 		voltage = readAIN0/12.8 # More accurate near 12 V
 		print (voltage)
 		if readTemperature() != None:
-			print ("Current temperature : %0.3f C" % readTemperature())
+			print ("Current temperature : %0.3f F" % readTemperature())
 		time.sleep(timeBetweenMeasurements)
 		
 def destroy():
