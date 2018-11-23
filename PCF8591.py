@@ -38,7 +38,7 @@ def read(chn): #channel
 		if chn == 3:
 			bus.write_byte(address,0x43)
 		bus.read_byte(address) # dummy read to start conversion
-	except Exception as exception:
+	except Exception as exception: cfbgvtc 
 		print ("Address: %s" % address)
 		print (exception)
 	return bus.read_byte(address)
