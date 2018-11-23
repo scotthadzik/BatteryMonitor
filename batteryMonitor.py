@@ -17,7 +17,7 @@ def setup():
 def loop():
 	while True:
 		print (ADC.read(0))
-		ADC.write(ADC.read(0))
+		# ADC.write(ADC.read(0))
 		time.sleep(5)
 
 def destroy():
