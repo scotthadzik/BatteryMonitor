@@ -25,6 +25,7 @@ def convertToVoltage(valueInBytes):
 def loop():
 	while True:
 		readAIN0 = ADC.read(0)
+		print('reading is', readAIN0)
 		voltage = ((255 - readAIN0) / 33) * 4
 		print (voltage)
 		time.sleep(5)
