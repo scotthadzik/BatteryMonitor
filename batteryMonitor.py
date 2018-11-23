@@ -15,8 +15,11 @@ voltage = 0
 def setup():
 	ADC.setup(0x48)
 
-def convertToVoltage(i2CData):
-	byteValue = int.from_bytes(b'\x00\x10', byteorder='little')
+def convertToVoltage(valueInBytes):
+	# byteValue = int.from_bytes(b'\x00\x10', byteorder='little')
+	byteValue = 0
+	for byte in valueInBytes:
+		byteValue = byteValue + int(byte)
 	return byteValue
 
 def loop():
