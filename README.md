@@ -1,8 +1,9 @@
 # Setup Instructions
-
+Runs on Raspian Stretch without Desktop
 
 ## External Modules
 Run this before running program
+- sudo apt install python3-pip
 - sudo pip3 install guizero
 - sudo apt update
 - sudo apt upgrade
