@@ -40,7 +40,7 @@ def readTemperature():
 def loop():
 	while True:
 		readAIN0 = ADC.read(0)
-		voltage = readAIN0/12.8 # More accurate near 12 V
+		voltage = readAIN0 # More accurate near 12 V
 		print ("Current Battery Voltage: %0.3f" % float(voltage))
 		if readTemperature() != None:
 			print ("Current temperature : %0.3f F" % readTemperature())
