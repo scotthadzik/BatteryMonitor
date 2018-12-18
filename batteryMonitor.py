@@ -12,7 +12,7 @@ import PCF8591 as ADC
 import time
 import os
 
-timeBetweenMeasurements = 5
+timeBetweenMeasurements = 1
 voltage = 0
 ds18b20 = ''
 
