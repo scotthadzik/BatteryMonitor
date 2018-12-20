@@ -11,6 +11,7 @@
 import PCF8591 as ADC
 import time
 import os
+import sys
 
 timeBetweenMeasurements = 5
 voltage = 0
