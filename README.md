@@ -10,3 +10,6 @@ Run this before running program
 - modify /boot/config.txt
 	- dtoverlay=w1-gpio
 - sudo reboot
+
+SMS Setup
+https://iotguider.in/raspberrypi/send-sms-from-raspberry-pi-python/
