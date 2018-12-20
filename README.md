@@ -13,3 +13,8 @@ Run this before running program
 
 SMS Setup
 https://iotguider.in/raspberrypi/send-sms-from-raspberry-pi-python/
+
+Modify file send_sms.py
+import nexmo
+client = nexmo.Client(key='YOUR-API-KEY', secret='YOUR-API-SECRET')
+client.send_message({'from': 'Nexmo', 'to': 'YOUR-PHONE-NUMBER', 'text': 'Hello world'})
