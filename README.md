@@ -1,5 +1,5 @@
 # Setup Instructions
-Runs on Raspian Stretch without Desktop
+Runs on Raspian without Desktop
 
 ## External Modules
 Run this before running program
