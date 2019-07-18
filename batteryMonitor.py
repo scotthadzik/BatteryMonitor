@@ -8,6 +8,7 @@
 
 # print("Connected to Pi") # Added to Github
 
+import LCD1602
 import PCF8591 as ADC
 import time
 import os
@@ -23,6 +24,11 @@ def setup():
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
 			ds18b20 = i
+	LCD1602.init(0x27, 1)	# init(slave address, background light)
+	LCD1602.clear	# init(slave address, background light)
+	LCD1602.write(0, 0, 'Electrical')
+	LCD1602.write(1, 1, 'Trainer')
+	time.sleep(2)
 
 def readTemperature():
 #	global ds18b20
