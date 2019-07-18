@@ -3,7 +3,7 @@
 import time
 import smbus
 
-BUS = smbus.SMBus(0)
+BUS = smbus.SMBus(1)
 
 def write_word(addr, data):
 	global BLEN

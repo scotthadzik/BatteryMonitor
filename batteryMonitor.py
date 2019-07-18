@@ -9,7 +9,7 @@
 # print("Connected to Pi") # Added to Github
 
 import LCD1602
-import PCF8591 as ADC
+# import PCF8591 as ADC
 import time
 import os
 import sys
