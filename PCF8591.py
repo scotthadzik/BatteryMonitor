@@ -22,7 +22,7 @@ import time
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
 
-#check your PCF8591 address by type in 'sudo i2cdetect -y -1' in terminal.
+#check your PCF8591 address by type in 'sudo i2cdetect -y 1' in terminal.
 def setup(Addr):
 	global address
 	address = Addr

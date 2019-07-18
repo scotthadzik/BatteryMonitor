@@ -19,16 +19,16 @@ voltage = 0
 ds18b20 = ''
 
 def setup():
-	ADC.setup(0x48)
-	global ds18b20
-	for i in os.listdir('/sys/bus/w1/devices'):
-		if i != 'w1_bus_master1':
-			ds18b20 = i
+	# ADC.setup(0x48)
+	# global ds18b20
+	# for i in os.listdir('/sys/bus/w1/devices'):
+	# 	if i != 'w1_bus_master1':
+	# 		ds18b20 = i
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Electrical')
 	LCD1602.write(1, 1, 'Trainer')
-	time.sleep(20)
+	time.sleep(2)
 
 def readTemperature():
 #	global ds18b20
@@ -46,9 +46,9 @@ def readTemperature():
 
 def loop():
 	while True:
-		readAIN0 = ADC.read(0)
-		voltage = readAIN0 # More accurate near 12 V
-		print ("Current Battery Voltage: %0.3f" % float(voltage))
+		# readAIN0 = ADC.read(0)
+		# voltage = readAIN0 # More accurate near 12 V
+		# print ("Current Battery Voltage: %0.3f" % float(voltage))
 		if readTemperature() != None:
 			print ("Current temperature : %0.3f F" % readTemperature())
 			LCD1602.write(0, 0, 'Temp =')
