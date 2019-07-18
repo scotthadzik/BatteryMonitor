@@ -20,10 +20,10 @@ ds18b20 = ''
 
 def setup():
 	# ADC.setup(0x48)
-	# global ds18b20
-	# for i in os.listdir('/sys/bus/w1/devices'):
-	# 	if i != 'w1_bus_master1':
-	# 		ds18b20 = i
+	global ds18b20
+	for i in os.listdir('/sys/bus/w1/devices'):
+		if i != 'w1_bus_master1':
+			ds18b20 = i
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Electrical')
