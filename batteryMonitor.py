@@ -61,6 +61,6 @@ def destroy():
 if __name__ == "__main__":
 	try:
 		setup()
-		loop()
+		# loop()
 	except KeyboardInterrupt:
 		destroy()
