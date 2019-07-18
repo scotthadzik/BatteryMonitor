@@ -25,7 +25,7 @@ def setup():
 		if i != 'w1_bus_master1':
 			ds18b20 = i
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
-	LCD1602.clear	# init(slave address, background light)
+	LCD1602.clear
 	LCD1602.write(0, 0, 'Electrical')
 	LCD1602.write(1, 1, 'Trainer')
 	time.sleep(20)
@@ -51,6 +51,8 @@ def loop():
 		print ("Current Battery Voltage: %0.3f" % float(voltage))
 		if readTemperature() != None:
 			print ("Current temperature : %0.3f F" % readTemperature())
+			LCD1602.write(0, 0, 'Temp =')
+			LCD1602.write(1, 1, 'On time =')
 		time.sleep(timeBetweenMeasurements)
 		
 def destroy():
