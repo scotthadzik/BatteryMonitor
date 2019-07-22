@@ -61,14 +61,13 @@ def loop():
 		# readAIN0 = ADC.read(0)
 		# voltage = readAIN0 # More accurate near 12 V
 		count = countIfOn()
-		if readTemperature() != None:
-			LCD1602.clear
-			currentTemp = readTemperature()
-			formatedTemp = "{:.2f} F".format(currentTemp)
-			print ("Current temperature : " + formatedTemp)
-			LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
-			LCD1602.write(1, 1, 'On time = ' + count)
-			time.sleep(timeBetweenMeasurements)
+		LCD1602.clear
+		currentTemp = readTemperature()
+		formatedTemp = "{:.2f} F".format(currentTemp)
+		print ("Current temperature : " + formatedTemp)
+		LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
+		LCD1602.write(1, 1, 'On time = ' + count)
+		time.sleep(timeBetweenMeasurements)
 		
 def destroy():
 	ADC.write(0)
