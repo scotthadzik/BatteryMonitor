@@ -9,7 +9,7 @@
 # print("Connected to Pi") # Added to Github
 
 import LCD1602
-# import PCF8591 as ADC
+import PCF8591 as ADC
 import time
 import os
 import sys
@@ -19,7 +19,7 @@ voltage = 0
 ds18b20 = ''
 
 def setup():
-	# ADC.setup(0x48)
+	ADC.setup(0x48)
 	global ds18b20
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
@@ -46,9 +46,9 @@ def readTemperature():
 
 def loop():
 	while True:
-		# readAIN0 = ADC.read(0)
-		# voltage = readAIN0 # More accurate near 12 V
-		# print ("Current Battery Voltage: %0.3f" % float(voltage))
+		readAIN0 = ADC.read(0)
+		voltage = readAIN0 # More accurate near 12 V
+		print ("Current Battery Voltage: %0.3f" % float(voltage))
 		if readTemperature() != None:
 			print ("Current temperature : %0.3f F" % readTemperature())
 			LCD1602.write(0, 0, 'Temp =')
@@ -61,6 +61,6 @@ def destroy():
 if __name__ == "__main__":
 	try:
 		setup()
-		# loop()
+		loop()
 	except KeyboardInterrupt:
 		destroy()
