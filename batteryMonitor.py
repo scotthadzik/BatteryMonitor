@@ -51,9 +51,9 @@ def loop():
 		print ("Current Battery Voltage: %0.3f" % float(voltage))
 		if readTemperature() != None:
 			LCD1602.clear
-			temperature = readTemperature()
-			print ("Current temperature : %0.3f F" % temperature)
-			LCD1602.write(0, 0, 'Temp = : %0.3f F" % temperature')
+			formatedTemp = "{:.f} F".format(readTemperature(),3)
+			print ("Current temperature : " + formatedTemp)
+			LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
 			LCD1602.write(1, 1, 'On time =')
 			time.sleep(timeBetweenMeasurements)
 		
