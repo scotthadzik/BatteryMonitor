@@ -51,7 +51,8 @@ def loop():
 		print ("Current Battery Voltage: %0.3f" % float(voltage))
 		if readTemperature() != None:
 			LCD1602.clear
-			formatedTemp = "{:.f} F".format(readTemperature(),3)
+			currentTemp = readTemperature()
+			formatedTemp = "{:.2f} F".format(currentTemp)
 			print ("Current temperature : " + formatedTemp)
 			LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
 			LCD1602.write(1, 1, 'On time =')
