@@ -46,9 +46,9 @@ def readTemperature():
 
 def countIfOn():
 	global count
-	print ("Current Battery Voltage: %0.3f" % float(voltage))
 	readAIN0 = ADC.read(0)
 	voltage = readAIN0 # More accurate near 12 V
+	print ("Current Battery Voltage: %0.3f" % float(voltage))
 	if voltage > 50:
 		count+=1
 	print ("Number of times tured on" + count)
