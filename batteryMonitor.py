@@ -51,7 +51,7 @@ def countIfOn():
 	print ("Current Battery Voltage: %0.3f" % float(voltage))
 	if voltage > 50:
 		count+=1
-	print ("Number of times tured on" + count)
+	print ("Number of times tured on" + str(count)
 	return count
 
 
