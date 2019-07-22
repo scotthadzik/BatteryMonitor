@@ -50,9 +50,9 @@ def loop():
 		voltage = readAIN0 # More accurate near 12 V
 		print ("Current Battery Voltage: %0.3f" % float(voltage))
 		# if readTemperature() != None:
-		# 	print ("Current temperature : %0.3f F" % readTemperature())
-		# 	LCD1602.write(0, 0, 'Temp =')
-		# 	LCD1602.write(1, 1, 'On time =')
+		print ("Current temperature : %0.3f F" % readTemperature())
+		LCD1602.write(0, 0, 'Temp =')
+		LCD1602.write(1, 1, 'On time =')
 		time.sleep(timeBetweenMeasurements)
 		
 def destroy():
