@@ -18,6 +18,7 @@ timeBetweenMeasurements = 1
 voltage = 0
 ds18b20 = ''
 count = 0
+pushButton = 36 # BCM16 physical pin 36
 
 def setup():
 	ADC.setup(0x48)
