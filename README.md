@@ -20,15 +20,5 @@ http://cloudconnectkits.org/sites/default/files/GettingStartedGuide_Pi3_LTE_rv1-
 SMS Setup
 https://iotguider.in/raspberrypi/send-sms-from-raspberry-pi-python/
 
-Modify file send_sms.py
-import nexmo
-client = nexmo.Client(key='YOUR-API-KEY', secret='YOUR-API-SECRET')
-client.send_message({'from': 'Nexmo', 'to': 'YOUR-PHONE-NUMBER', 'text': 'Hello world'})
-
-
-
-
-
-
 ##FRDM-K64F
 https://os.mbed.com/platforms/FRDM-K64F/#technical-doc
