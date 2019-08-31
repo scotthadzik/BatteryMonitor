@@ -1,18 +1,28 @@
-# from guizero import App, Text
-
-# app = App(title="Battery Monitor", layout="grid" )
-# batteryMessage      = Text(app, text="Battery Voltage", grid=[0,0])
-# temperatureMessage  = Text(app, text="Temperature", grid=[1,0], align="right")
-
-# app.display()
-
-# print("Connected to Pi") # Added to Github
-
 import LCD1602
 import PCF8591 as ADC
 import time
+import datetime
 import os
 import sys
+from twilio.rest import Client
+
+
+# Your Account Sid and Auth Token from twilio.com/console
+# DANGER! This is insecure. See http://twil.io/secure
+account_sid = 'AC2b939fef91f46b58d2ca45001cc09a71'
+auth_token = '1d2ae026e641ccdfe8b3dad6ab4fb088'
+client = Client(account_sid, auth_token)
+
+message = client.messages \
+                .create(
+                     body="The battery monitor has restarted",
+                     from_='+18019489202',
+                     to='+14358502964'
+                 )
+
+print(message.sid)
+
+
 
 timeBetweenMeasurements = 1
 voltage = 0
@@ -31,6 +41,8 @@ def setup():
 	LCD1602.write(0, 0, 'Electrical')
 	LCD1602.write(1, 1, 'Trainer')
 	time.sleep(2)
+	currentTime = datetime.datetime.now()
+	print (currentTime)
 
 def readTemperature():
 #	global ds18b20
@@ -79,3 +91,12 @@ if __name__ == "__main__":
 		loop()
 	except KeyboardInterrupt:
 		destroy()
+
+def sendMessage():
+	message = client.messages \
+                .create(
+                     body="The battery monitor has restarted",
+                     from_='+18019489202',
+                     to='+14358502964'
+                 )
+	print(message.sid)
