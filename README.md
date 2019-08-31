@@ -22,3 +22,6 @@ https://iotguider.in/raspberrypi/send-sms-from-raspberry-pi-python/
 
 ##FRDM-K64F
 https://os.mbed.com/platforms/FRDM-K64F/#technical-doc
+
+
+##Run pi program on startup https://learn.sparkfun.com/tutorials/how-to-run-a-raspberry-pi-program-on-startup/all
