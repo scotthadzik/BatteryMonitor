@@ -11,16 +11,16 @@ import env as env
 # Your Account Sid and Auth Token from twilio.com/console
 # DANGER! This is insecure. See http://twil.io/secure
 
+#Twilio Credentials
 auth_token = env.TW_TOKEN
-# auth_token = os.environ['PATH']
 account_sid = env.TW_SID
-print (auth_token)
 
 client = Client(account_sid, auth_token)
 
 timeBetweenMeasurements = 1
 voltage = 0
 ds18b20 = ''
+timeOn = 0
 count = 0
 pushButton = 36 # BCM16 physical pin 36
 
@@ -64,7 +64,6 @@ def countIfOn():
 	return count
 
 def sendMessage(messageBody):
-	print('send message')
 	message = client.messages \
                 .create(
                      body=messageBody,
