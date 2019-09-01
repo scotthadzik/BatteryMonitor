@@ -10,9 +10,9 @@ from twilio.rest import Client
 # Your Account Sid and Auth Token from twilio.com/console
 # DANGER! This is insecure. See http://twil.io/secure
 
-#auth_token = os.environ['TWILIO_AUTH_TOKEN']
-auth_token = os.environ['PATH']
-#account_sid = os.environ['TWILIO_ACNT_SID']
+auth_token = os.environ['TW_TOKEN']
+# auth_token = os.environ['PATH']
+account_sid = os.environ['TW_SID']
 print (auth_token)
 
 # client = Client(account_sid, auth_token)
