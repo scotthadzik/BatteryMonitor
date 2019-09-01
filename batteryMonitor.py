@@ -23,7 +23,7 @@ ds18b20 = ''
 timeOn = 0
 count = 0
 pushButton = 36 # BCM16 physical pin 36
-startingTime = datetime.datetime.now()
+startingTime = time.time()
 
 def setup():
 	sendMessage("Pi has started")
@@ -79,11 +79,11 @@ def loop():
 		# voltage = readAIN0 # More accurate near 12 V
 		count = countIfOn()
 		LCD1602.clear
-		currentTime = datetime.datetime.now()
+		currentTime = time.time()
 		timeDifference = currentTime - startingTime
 		timeDifferenceSec = timeDifference.seconds
 		print (timeDifferenceSec)
-		if (timeDifference > 20.0):
+		if (timeDifference > 20):
 			print ('inside loop')
 			currentTemp = readTemperature()
 			formatedTemp = "{:.2f} F".format(currentTemp)
