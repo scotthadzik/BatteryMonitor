@@ -9,8 +9,8 @@ from twilio.rest import Client
 
 # Your Account Sid and Auth Token from twilio.com/console
 # DANGER! This is insecure. See http://twil.io/secure
-account_sid = 'AC2b939fef91f46b58d2ca45001cc09a71'
-auth_token = '1d2ae026e641ccdfe8b3dad6ab4fb088'
+account_sid = TWILIO_ACTN_SID
+auth_token = TWILIO_AUTH_TOKEN
 client = Client(account_sid, auth_token)
 
 timeBetweenMeasurements = 1
