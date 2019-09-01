@@ -61,10 +61,10 @@ def countIfOn():
 	global count
 	readAIN0 = ADC.read(0)
 	voltage = readAIN0 # More accurate near 12 V
-	if voltage > 50 and motorTurnedOver == False: #Increase the count --> use the pumpIsON state to verify that the On time is not counted
+	if voltage > 50 and motorTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
 		count +=1
 		motorTurnedOver = True
-	if voltage < 50 and motorTurnedOver == True:
+	if voltage < 50 and motorTurnedOver == True: # The motor turned over, but now it is not turning over
 		motorTurnedOver = False
 	return count
 
