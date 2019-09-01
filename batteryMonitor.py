@@ -63,7 +63,15 @@ def countIfOn():
 	print ("Number of times tured on" + str(count))
 	return count
 
-
+def sendMessage(messageBody):
+	print('send message')
+	message = client.messages \
+                .create(
+                     body=messageBody,
+                     from_='+18019489202',
+                     to='+14358502964'
+                 )
+	print(message.sid)
 
 def loop():
 	while True:
@@ -81,6 +89,8 @@ def loop():
 def destroy():
 	ADC.write(0)
 
+
+
 if __name__ == "__main__":
 	try:
 		setup()
@@ -88,12 +98,4 @@ if __name__ == "__main__":
 	except KeyboardInterrupt:
 		destroy()
 
-def sendMessage(messageBody):
-	print('send message')
-	message = client.messages \
-                .create(
-                     body=messageBody,
-                     from_='+18019489202',
-                     to='+14358502964'
-                 )
-	print(message.sid)
+
