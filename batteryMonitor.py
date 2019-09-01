@@ -5,14 +5,15 @@ import datetime
 import os
 import sys
 from twilio.rest import Client
+import env as env
 
 
 # Your Account Sid and Auth Token from twilio.com/console
 # DANGER! This is insecure. See http://twil.io/secure
 
-auth_token = os.environ['TW_TOKEN']
+auth_token = env.TW_TOKEN
 # auth_token = os.environ['PATH']
-account_sid = os.environ['TW_SID']
+account_sid = env.TW_SID
 print (auth_token)
 
 # client = Client(account_sid, auth_token)
