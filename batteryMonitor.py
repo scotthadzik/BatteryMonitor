@@ -85,7 +85,7 @@ if __name__ == "__main__":
 def sendMessage():
 	message = client.messages \
                 .create(
-                     body="The battery monitor has restarted",
+                     body="The battery monitor is active",
                      from_='+18019489202',
                      to='+14358502964'
                  )
