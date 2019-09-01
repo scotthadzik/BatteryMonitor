@@ -43,6 +43,14 @@ def setup():
 	time.sleep(2)
 	currentTime = datetime.datetime.now()
 	print (currentTime)
+	message = client.messages \
+                .create(
+                     body="The battery monitor has run setup",
+                     from_='+18019489202',
+                     to='+14358502964'
+                 )
+
+print(message.sid)
 
 def readTemperature():
 #	global ds18b20
