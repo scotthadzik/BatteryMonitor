@@ -24,6 +24,9 @@ timeOn = 0
 count = 0
 pushButton = 36 # BCM16 physical pin 36
 startingTime = time.time()
+temperatureMeasureFreq = 20 # Change this to the number of seconds that the temperature is measured
+pumpOnMeasureFreq = 15 # Change this to the number of seconds that the pump voltage is checked
+pumpIsON = False # state of the pump
 
 def setup():
 	sendMessage("Pi has started")
@@ -58,10 +61,9 @@ def countIfOn():
 	global count
 	readAIN0 = ADC.read(0)
 	voltage = readAIN0 # More accurate near 12 V
-	print ("Current Battery Voltage: %0.3f" % float(voltage))
-	if voltage > 50:
-		count+=1
-	print ("Number of times tured on" + str(count))
+	if voltage > 50 and motorTurnedOver == False: #Increase the count --> use the pumpIsON state to verify that the On time is not counted
+		count +=1
+		motorTurnedOver = True
 	return count
 
 def sendMessage(messageBody):
@@ -78,6 +80,7 @@ def loop():
 		# readAIN0 = ADC.read(0)
 		# voltage = readAIN0 # More accurate near 12 V
 		count = countIfOn()
+		print ('The count is ' + str(count))
 		LCD1602.clear
 		currentTime = time.time()
 		timeDifference = currentTime - startingTime
@@ -88,7 +91,6 @@ def loop():
 			formatedTemp = "{:.2f} F".format(currentTemp)
 			print ("Current temperature : " + formatedTemp)
 			LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
-			LCD1602.write(1, 1, 'On time = ' + str(count))
 		
 		time.sleep(timeBetweenMeasurements)
 		
