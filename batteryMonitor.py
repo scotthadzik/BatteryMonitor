@@ -16,7 +16,7 @@ auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
 print (auth_token)
 
-# client = Client(account_sid, auth_token)
+client = Client(account_sid, auth_token)
 
 timeBetweenMeasurements = 1
 voltage = 0
