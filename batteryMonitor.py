@@ -64,6 +64,8 @@ def countIfOn():
 	if voltage > 50 and motorTurnedOver == False: #Increase the count --> use the pumpIsON state to verify that the On time is not counted
 		count +=1
 		motorTurnedOver = True
+	if voltage < 50 and motorTurnedOver == True:
+		motorTurnedOver = False
 	return count
 
 def sendMessage(messageBody):
