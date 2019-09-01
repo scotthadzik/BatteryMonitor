@@ -26,7 +26,7 @@ pushButton = 36 # BCM16 physical pin 36
 startingTime = time.time()
 temperatureMeasureFreq = 20 # Change this to the number of seconds that the temperature is measured
 pumpOnMeasureFreq = 15 # Change this to the number of seconds that the pump voltage is checked
-pumpIsON = False # state of the pump
+motorTurnedOver = False # state of the pump
 
 def setup():
 	sendMessage("Pi has started")
