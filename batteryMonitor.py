@@ -59,6 +59,7 @@ def readTemperature():
 
 def countIfOn():
 	global count
+	global motorTurnedOver
 	readAIN0 = ADC.read(0)
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and motorTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
