@@ -81,8 +81,7 @@ def loop():
 		LCD1602.clear
 		currentTime = time.time()
 		timeDifference = currentTime - startingTime
-		timeDifferenceSec = timeDifference.seconds
-		print (timeDifferenceSec)
+		print (timeDifference)
 		if (timeDifference > 20):
 			print ('inside loop')
 			currentTemp = readTemperature()
