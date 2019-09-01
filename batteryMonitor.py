@@ -83,7 +83,7 @@ def loop():
 		timeDifference = currentTime - startingTime
 		timeDifferenceSec = timeDifference.seconds
 		print (timeDifferenceSec)
-		if (int(timeDifference) > 20):
+		if (timeDifference > 20.0):
 			print ('inside loop')
 			currentTemp = readTemperature()
 			formatedTemp = "{:.2f} F".format(currentTemp)
