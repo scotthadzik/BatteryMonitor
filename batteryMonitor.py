@@ -80,7 +80,9 @@ def loop():
 		count = countIfOn()
 		LCD1602.clear
 		currentTime = datetime.datetime.now()
-		if (currentTime-startingTime == 5):
+		timeDifference = currentTime - startingTime
+		print (timeDifference)
+		if (timeDifference > 1):
 			print ('inside loop')
 			currentTemp = readTemperature()
 			formatedTemp = "{:.2f} F".format(currentTemp)
