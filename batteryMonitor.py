@@ -89,6 +89,7 @@ def sendMessage(messageBody):
 	print(message.sid)
 
 def loop():
+	global startingTime
 	while True:
 		count = countIfOn()
 		print ('The count is ' + str(count))
