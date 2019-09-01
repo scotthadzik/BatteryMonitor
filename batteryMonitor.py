@@ -13,17 +13,6 @@ account_sid = 'AC2b939fef91f46b58d2ca45001cc09a71'
 auth_token = '1d2ae026e641ccdfe8b3dad6ab4fb088'
 client = Client(account_sid, auth_token)
 
-message = client.messages \
-                .create(
-                     body="The battery monitor has restarted",
-                     from_='+18019489202',
-                     to='+14358502964'
-                 )
-
-print(message.sid)
-
-
-
 timeBetweenMeasurements = 1
 voltage = 0
 ds18b20 = ''
@@ -50,7 +39,7 @@ def setup():
                      to='+14358502964'
                  )
 
-print(message.sid)
+	print(message.sid)
 
 def readTemperature():
 #	global ds18b20
