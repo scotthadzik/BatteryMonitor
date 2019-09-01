@@ -13,9 +13,9 @@ from twilio.rest import Client
 #auth_token = os.environ['TWILIO_AUTH_TOKEN']
 auth_token = os.environ['PATH']
 #account_sid = os.environ['TWILIO_ACNT_SID']
+print (auth_token)
 
-
-client = Client(account_sid, auth_token)
+# client = Client(account_sid, auth_token)
 
 timeBetweenMeasurements = 1
 voltage = 0
