@@ -25,7 +25,7 @@ count = 0
 pushButton = 36 # BCM16 physical pin 36
 
 def setup():
-	sendMessage()
+	sendMessage("Pi has started")
 	ADC.setup(0x48)
 	global ds18b20
 	for i in os.listdir('/sys/bus/w1/devices'):
@@ -88,11 +88,11 @@ if __name__ == "__main__":
 	except KeyboardInterrupt:
 		destroy()
 
-def sendMessage():
+def sendMessage(messageBody):
 	print('send message')
 	message = client.messages \
                 .create(
-                     body="The battery monitor is active",
+                     body=messageBody,
                      from_='+18019489202',
                      to='+14358502964'
                  )
