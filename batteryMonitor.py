@@ -25,8 +25,11 @@ count = 0
 pushButton = 36 # BCM16 physical pin 36
 startingTime = time.time()
 temperatureMeasureFreq = 20 # Change this to the number of seconds that the temperature is measured
-pumpOnMeasureFreq = 15 # Change this to the number of seconds that the pump voltage is checked
+motorTestFreq = 15 # Change this to the number of seconds that the pump voltage is checked
 motorTurnedOver = False # state of the pump
+motorStarterONAtTime = time.time()
+motorStarterOffAtTime = time.time()
+motorStarterRunTime = time.time()
 
 def setup():
 	sendMessage("Pi has started")
@@ -60,13 +63,20 @@ def readTemperature():
 def countIfOn():
 	global count
 	global motorTurnedOver
+	global motorStarterONAtTime
+	global motorStarterOffAtTime
+	global motorStarterRunTime
 	readAIN0 = ADC.read(0)
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and motorTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
 		count +=1
+		motorStarterONAtTime = time.time()
 		motorTurnedOver = True
 	if voltage < 50 and motorTurnedOver == True: # The motor turned over, but now it is not turning over
 		motorTurnedOver = False
+		motorStarterOffAtTime = time.time()
+		motorStarterRunTime = motorStarterOffAtTime - motorStarterONAtTime
+		print(' Starter ran for ' + motorStarterRunTime + ' seconds')
 	return count
 
 def sendMessage(messageBody):
@@ -80,8 +90,6 @@ def sendMessage(messageBody):
 
 def loop():
 	while True:
-		# readAIN0 = ADC.read(0)
-		# voltage = readAIN0 # More accurate near 12 V
 		count = countIfOn()
 		print ('The count is ' + str(count))
 		LCD1602.clear
@@ -89,11 +97,11 @@ def loop():
 		timeDifference = currentTime - startingTime
 		print (timeDifference)
 		if (timeDifference > 20):
-			print ('inside loop')
 			currentTemp = readTemperature()
 			formatedTemp = "{:.2f} F".format(currentTemp)
 			print ("Current temperature : " + formatedTemp)
 			LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
+			currentTime = time.time()
 		
 		time.sleep(timeBetweenMeasurements)
 		
