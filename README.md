@@ -25,3 +25,7 @@ https://os.mbed.com/platforms/FRDM-K64F/#technical-doc
 
 
 ##Run pi program on startup https://learn.sparkfun.com/tutorials/how-to-run-a-raspberry-pi-program-on-startup/all
+
+##sms bot with NGrok https://makezine.com/projects/sms-bot/
+
+## remote temp monitor https://hackmypi.com/RemoteTemperatureMonitoring.php
