@@ -92,16 +92,17 @@ def loop():
 	global startingTime
 	while True:
 		count = countIfOn()
-		LCD1602.clear
+		
 		currentTime = time.time()
 		timeDifference = currentTime - startingTime
 		if (timeDifference > 20):
+			LCD1602.clear
 			currentTemp = readTemperature()
 			formatedTemp = "{:.2f} F".format(currentTemp)
 			print ("Current temperature : " + formatedTemp)
 			LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
-			print ("Number of Times On : " + str(count))
-			LCD1602.write(1, 0, 'Count = : ' + str(count))
+			print ("Number of Times Started : " + str(count))
+			LCD1602.write(1, 1, 'Count = : ' + str(count))
 			startingTime = time.time()
 		
 		time.sleep(timeBetweenMeasurements)
