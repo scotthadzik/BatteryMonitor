@@ -92,11 +92,9 @@ def loop():
 	global startingTime
 	while True:
 		count = countIfOn()
-		print ('The count is ' + str(count))
 		LCD1602.clear
 		currentTime = time.time()
 		timeDifference = currentTime - startingTime
-		print (timeDifference)
 		if (timeDifference > 20):
 			currentTemp = readTemperature()
 			formatedTemp = "{:.2f} F".format(currentTemp)
