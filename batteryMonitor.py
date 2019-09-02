@@ -83,8 +83,8 @@ def sendMessage(messageBody):
 	message = client.messages \
                 .create(
                      body=messageBody,
-                     from_='+18019489202',
-                     to='+14358502964'
+                     from_=env.PI_Number,
+                     to=env.SMS_Number
                  )
 	print(message.sid)
 
