@@ -102,6 +102,8 @@ def loop():
 			formatedTemp = "{:.2f} F".format(currentTemp)
 			print ("Current temperature : " + formatedTemp)
 			LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
+			print ("Number of Times On : " + str(count))
+			LCD1602.write(1, 0, 'Count = : ' + str(count))
 			startingTime = time.time()
 		
 		time.sleep(timeBetweenMeasurements)
