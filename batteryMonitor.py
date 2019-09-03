@@ -69,9 +69,9 @@ def readTemperature():
 	temperature = float(temperaturedata[2:])
 	temperature = temperature / 1000
 	temperature = (temperature* 9/5) + 32
-	if (dayLowTemp > temperature):
+	if (temperature < dayLowTemp):
 		dayLowTemp = temperature
-	if (dayHighTemp < temperature):
+	if (temperature > dayHighTemp):
 		dayHighTemp = temperature
 	return temperature
 
