@@ -31,11 +31,10 @@ motorStarterONAtTime = time.time()
 motorStarterOffAtTime = time.time()
 motorStarterRunTime = time.time()
 
-reportTime1= datetime.time(8,00,00)
-reportTime2= datetime.time(12,00,00)
-reportTime3= datetime.time(16,00,00)
-reportTime4= datetime.time(18,00,00)
-reportTimeTest = datetime.time(19,00,00)
+reportTime1= 8
+reportTime2= 12
+reportTime3= 16
+reportTime4= 20
 
 sentReport = False
 
@@ -114,9 +113,10 @@ def loop():
 			#reset the starting time
 			startingTime = time.time()
 		dateNow = datetime.datetime.now()
-		print (dateNow.hour)
-		# if(timeNow > reportTimeTest and sentReport == False):
-		# 	print('sendSMS')
+		currentHour = dateNow.hour
+		if(currentHour > reportTime3 and sentReport == False):
+			print('sendSMS')
+			sentReport = True
 		# 	sendMessage('This is a voltage message')
 		# time.sleep(timeBetweenMeasurements)
 		
