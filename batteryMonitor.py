@@ -112,7 +112,7 @@ def loop():
 			print ("Current temperature : " + formatedTemp)
 			#reset the starting time
 			startingTime = time.time()
-		if(currentTime > reportTimeTest and sentReport == False)
+		if(currentTime > reportTimeTest and sentReport == False):
 			print('sendSMS')
 			sendMessage('This is a voltage message')
 		time.sleep(timeBetweenMeasurements)
