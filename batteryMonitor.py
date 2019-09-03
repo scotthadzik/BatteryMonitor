@@ -155,7 +155,7 @@ def createMessageBody(report, temp, starts, hightemp, lowtemp):
 				'The current temperature is ' + temp + '\n' +
 				'The low temp was ' + formatedHighTemp + '\n' +
 				# 'The high temp was ' + hightemp + '\n' +
-				'The engine was turned over ' + str(starts) + ' times ')
+				# 'The engine was turned over ' + str(starts) + ' times ')
 	return message
 		
 def destroy():
