@@ -136,28 +136,27 @@ def loop():
 	global dayHighTemp
 	global dayLowTemp
 	while True:
+		currentTime = time.time() # set a value to track the current time to compare to the start time
 		count = countIfOn()
-		currentTime = time.time()
-		currentTemp = readTemperature()
+		readTemperature()
 		timeDifference = currentTime - startingTime
-		if (timeDifference > 20):
-			LCD1602.clear
-			reportTemperature()
-			#Output to the LCD
+		# if (timeDifference > 20):
+		# 	LCD1602.clear
+		# 	reportTemperature()
 			
-			LCD1602.write(1, 1, 'Count = : ' + str(count))
-			#print to console
-			print ("Number of Times Started : " + str(count))
+		# 	LCD1602.write(1, 1, 'Count = : ' + str(count))
+		# 	#print to console
+		# 	print ("Number of Times Started : " + str(count))
 			
-			#reset the starting time
-			startingTime = time.time()
+		# 	#reset the starting time
+		# 	startingTime = time.time()
 		
-		if(currentHour > reportTime[index] and sentReport == False):
+		if(currentHour > reportTime[index]):
 			currentTemperature = reportTemperature()
-			print('sendSMS ' + currentTemperature)
-			sentReport = True
-		# 	sendMessage('This is a voltage message')
-		# time.sleep(timeBetweenMeasurements)
+			print('sendSMS ' + currentTemperature + ' number of start times')
+			index = (index + 1 ) % len(reportTime)
+			print (index)
+		
 		
 def destroy():
 	ADC.write(0)
