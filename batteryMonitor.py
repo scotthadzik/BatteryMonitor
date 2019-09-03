@@ -67,7 +67,7 @@ def setup():
 	elif(currentHour <= reportTime[2]):
 		index = 2
 		beginningOfTheDay = False
-	elif(currentHour <= reportTime[3]):
+	else:
 		index = 3
 		beginningOfTheDay = False
 	print(index)#TODO for testing only
