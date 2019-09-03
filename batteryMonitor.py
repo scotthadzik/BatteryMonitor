@@ -79,6 +79,8 @@ def countIfOn():
 	global motorStarterONAtTime
 	global motorStarterOffAtTime
 	global motorStarterRunTime
+	global dayHighTemp
+	global dayLowTemp
 	readAIN0 = ADC.read(0)
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and motorTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
@@ -114,6 +116,8 @@ def reportTemperature():
 def loop():
 	global startingTime
 	global sentReport
+	global dayHighTemp
+	global dayLowTemp
 	while True:
 		count = countIfOn()
 		currentTime = time.time()
