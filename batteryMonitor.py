@@ -151,8 +151,8 @@ def loop():
 def createMessageBody(report, temp, starts, hightemp, lowtemp):
 	formatedHighTemp = "{:.2f} F".format(hightemp)
 	# Output to the LCD
-	message = 	(report.meridian + ' Report \n' +
-				'The current temperature is ' + temp + '\n')
+	message = 	(report.meridian + ' Report \n')
+				# 'The current temperature is ' + temp + '\n')
 				# 'The low temp was ' + str(formatedHighTemp) + '\n')
 				# 'The high temp was ' + hightemp + '\n' +
 				# 'The engine was turned over ' + str(starts) + ' times ')
