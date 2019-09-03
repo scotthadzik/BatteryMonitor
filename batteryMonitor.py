@@ -113,9 +113,8 @@ def loop():
 			print ("Current temperature : " + formatedTemp)
 			#reset the starting time
 			startingTime = time.time()
-		dateNow = datetime.datetime.now()
-		timeNow = dateNow.hour()
-		print (str(timeNow))
+		dateNow = datetime.datetime()
+		print (dateNow)
 		# if(timeNow > reportTimeTest and sentReport == False):
 		# 	print('sendSMS')
 		# 	sendMessage('This is a voltage message')
