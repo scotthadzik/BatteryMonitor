@@ -154,7 +154,7 @@ def loop():
 		
 		if(currentHour > reportTime[index]):
 			currentTemperature = reportTemperature()
-			print('sendSMS ' + currentTemperature + ' number of start times ' + count)
+			print('sendSMS ' + currentTemperature + ' number of start times ' + str(count))
 			index = (index + 1 ) % len(reportTime)
 			print (index)
 		
