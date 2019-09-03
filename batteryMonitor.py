@@ -99,7 +99,7 @@ def loop():
 	while True:
 		count = countIfOn()
 		currentTime = time.time()
-		print (currentTime)
+		
 		timeDifference = currentTime - startingTime
 		if (timeDifference > 20):
 			LCD1602.clear
@@ -114,6 +114,7 @@ def loop():
 			#reset the starting time
 			startingTime = time.time()
 		timeNow = datetime.time()
+		print (timeNow)
 		if(timeNow > reportTimeTest and sentReport == False):
 			print('sendSMS')
 			sendMessage('This is a voltage message')
