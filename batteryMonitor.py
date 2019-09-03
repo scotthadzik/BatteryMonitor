@@ -152,7 +152,7 @@ def loop():
 				print (message)
 				report.reported = True
 		testhour = testhour + 1
-		time.sleep(20)
+		time.sleep(2) #TODO delete
 
 
 def createMessageBody(report, temp, starts, hightemp, lowtemp):
