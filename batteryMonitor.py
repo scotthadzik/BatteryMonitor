@@ -128,7 +128,7 @@ def reportTemperature():
 	
 	LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
 	print ("Current temperature : " + formatedTemp)
-	print ("High temperature today: " + formatedHighTemp)
+	# print ("High temperature today: " + formatedHighTemp)
 	print ("Low temperature today: " + formatedLowTemp)
 	return formatedTemp
 
