@@ -113,12 +113,13 @@ def loop():
 			print ("Current temperature : " + formatedTemp)
 			#reset the starting time
 			startingTime = time.time()
-		timeNow = datetime.time()
+		dateNow = datetime.datetime.now()
+		timeNow = dateNow.hour()
 		print (timeNow)
-		if(timeNow > reportTimeTest and sentReport == False):
-			print('sendSMS')
-			sendMessage('This is a voltage message')
-		time.sleep(timeBetweenMeasurements)
+		# if(timeNow > reportTimeTest and sentReport == False):
+		# 	print('sendSMS')
+		# 	sendMessage('This is a voltage message')
+		# time.sleep(timeBetweenMeasurements)
 		
 def destroy():
 	ADC.write(0)
