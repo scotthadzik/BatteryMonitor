@@ -144,8 +144,9 @@ def loop():
 		for report in reports:
 			if (currentHour > report,time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
-				sendMessage(message)
-				report.reported = (True)
+				# sendMessage(message)
+				print (message)
+				report.reported = True
 
 
 def createMessageBody(report, temp, starts, hightemp, lowtemp):
