@@ -58,6 +58,7 @@ def setup():
 	LCD1602.write(1, 1, 'Trainer')
 	time.sleep(2)
 	reportTemperature()
+	print('current hour ' + currentHour)
 	if (currentHour <=reportTime[0]): #This needs changed if the number of report times are changed
 		index = 0
 	elif(currentHour <=reportTime[1]):
