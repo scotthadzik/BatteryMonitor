@@ -58,6 +58,8 @@ def setup():
 
 def readTemperature():
 #	global ds18b20
+	global dayHighTemp
+	global dayLowTemp
 	location = '/sys/bus/w1/devices/' + ds18b20 + '/w1_slave'
 	tfile = open(location)
 	text = tfile.read()
