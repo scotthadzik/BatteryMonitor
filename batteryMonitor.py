@@ -25,6 +25,9 @@ count = 0
 pushButton = 36 # BCM16 physical pin 36
 startingTime = time.time()
 temperatureMeasureFreq = 5 # Change this to the number of seconds that the temperature is measured
+dayLowTemp = 0
+dayHighTemp = 0
+
 motorTestFreq = 15 # Change this to the number of seconds that the pump voltage is checked
 motorTurnedOver = False # state of the pump
 motorStarterONAtTime = time.time()
@@ -64,6 +67,10 @@ def readTemperature():
 	temperature = float(temperaturedata[2:])
 	temperature = temperature / 1000
 	temperature = (temperature* 9/5) + 32
+	if (dayLowTemp > temperature):
+		dayLowTemp = temperature
+	if (dayHighTemp < temperature):
+		dayHighTemp = temperature
 	return temperature
 
 def countIfOn():
@@ -100,6 +107,8 @@ def reportTemperature():
 	# Output to the LCD
 	LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
 	print ("Current temperature : " + formatedTemp)
+	print ("High temperature today: " + dayHighTemp)
+	print ("Low temperature today: " + dayLowTemp)
 	return formatedTemp
 
 def loop():
@@ -108,6 +117,7 @@ def loop():
 	while True:
 		count = countIfOn()
 		currentTime = time.time()
+		currentTemp = readTemperature()
 		timeDifference = currentTime - startingTime
 		if (timeDifference > 20):
 			LCD1602.clear
