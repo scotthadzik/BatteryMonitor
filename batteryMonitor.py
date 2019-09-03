@@ -25,8 +25,8 @@ count = 0
 pushButton = 36 # BCM16 physical pin 36
 startingTime = time.time()
 temperatureMeasureFreq = 5 # Change this to the number of seconds that the temperature is measured
-dayLowTemp = 0
-dayHighTemp = 0
+dayLowTemp = 200
+dayHighTemp = -50
 
 motorTestFreq = 15 # Change this to the number of seconds that the pump voltage is checked
 motorTurnedOver = False # state of the pump
