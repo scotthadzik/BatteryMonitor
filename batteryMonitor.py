@@ -100,6 +100,7 @@ def reportTemperature():
 	# Output to the LCD
 	LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
 	print ("Current temperature : " + formatedTemp)
+	return formatedTemp
 
 def loop():
 	global startingTime
@@ -122,7 +123,8 @@ def loop():
 		dateNow = datetime.datetime.now()
 		currentHour = dateNow.hour
 		if(currentHour > reportTime3 and sentReport == False):
-			print('sendSMS')
+			currentTemperature = reportTemperature()
+			print('sendSMS ' + currentTemperature)
 			sentReport = True
 		# 	sendMessage('This is a voltage message')
 		# time.sleep(timeBetweenMeasurements)
