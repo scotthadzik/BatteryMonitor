@@ -95,6 +95,7 @@ def sendMessage(messageBody):
 
 def loop():
 	global startingTime
+	global sentReport
 	while True:
 		count = countIfOn()
 		currentTime = time.time()
