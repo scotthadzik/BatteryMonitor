@@ -125,8 +125,7 @@ def reportTemperature():
 	currentTemp = readTemperature()
 	formatedTemp = "{:.2f} F".format(currentTemp)
 	formatedLowTemp = "{:.2f} F".format(dayLowTemp)
-	formatedHighTemp = "{:.2f} F".format(dayHighTemp)
-	# Output to the LCD
+	
 	LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
 	print ("Current temperature : " + formatedTemp)
 	print ("High temperature today: " + formatedHighTemp)
@@ -150,9 +149,11 @@ def loop():
 
 
 def createMessageBody(report, temp, starts, hightemp, lowtemp):
+	formatedHighTemp = "{:.2f} F".format(hightemp)
+	# Output to the LCD
 	message = 	(report.meridian + ' Report \n' +
 				'The current temperature is ' + temp + '\n' +
-				'The low temp was ' + "{:.2f} F".format(lowtemp) + '\n' +
+				'The low temp was ' + formatedHighTemp + '\n' +
 				# 'The high temp was ' + hightemp + '\n' +
 				'The engine was turned over ' + str(starts) + ' times ')
 	return message
