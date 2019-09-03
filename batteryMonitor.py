@@ -39,6 +39,7 @@ longestCrank = 0
 
 dateNow = datetime.datetime.now()
 currentHour = dateNow.hour
+testhour = 8 #TODO this is for testing time
 beginningOfTheDay = True
 
 reports = [
@@ -138,16 +139,20 @@ def loop():
 	global dayHighTemp
 	global dayLowTemp
 	global index
+	global testhour #TODO remove this test
 	while True:
 		count = countIfOn()
 		currentTemperature = readTemperature()
+		print (testhour)
 		for report in reports:
-			testhour = 7 #TODO this is for testing time
-			if (testhour > report.time and report.reported == False):
+			
+			if (testhour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
 				# sendMessage(message)
 				print (message)
 				report.reported = True
+		testhour = testhour + 1
+		time.sleep(20)
 
 
 def createMessageBody(report, temp, starts, hightemp, lowtemp):
