@@ -114,7 +114,7 @@ def loop():
 			#reset the starting time
 			startingTime = time.time()
 		dateNow = datetime.datetime.now()
-		print (dateNow)
+		print (dateNow.hour)
 		# if(timeNow > reportTimeTest and sentReport == False):
 		# 	print('sendSMS')
 		# 	sendMessage('This is a voltage message')
