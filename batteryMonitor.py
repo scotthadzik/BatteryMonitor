@@ -153,7 +153,7 @@ def createMessageBody(report, temp, starts, hightemp, lowtemp):
 	# Output to the LCD
 	message = 	(report.meridian + ' Report \n' +
 				'The current temperature is ' + temp + '\n' +
-				'The low temp was ' + formatedHighTemp + '\n' +
+				'The low temp was ' + formatedHighTemp + '\n')
 				# 'The high temp was ' + hightemp + '\n' +
 				# 'The engine was turned over ' + str(starts) + ' times ')
 	return message
