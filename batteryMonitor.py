@@ -135,6 +135,7 @@ def loop():
 	global sentReport
 	global dayHighTemp
 	global dayLowTemp
+	global index
 	while True:
 		currentTime = time.time() # set a value to track the current time to compare to the start time
 		count = countIfOn()
