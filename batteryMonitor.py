@@ -37,7 +37,7 @@ reportTime3= datetime.time(16,00,00)
 reportTime4= datetime.time(18,00,00)
 reportTimeTest = datetime.time(18,50,00)
 
-sentReport = false
+sentReport = False
 
 
 def setup():
