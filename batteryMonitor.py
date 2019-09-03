@@ -51,6 +51,7 @@ def setup():
 	LCD1602.write(0, 0, 'Electrical')
 	LCD1602.write(1, 1, 'Trainer')
 	time.sleep(2)
+	reportTemperature()
 
 def readTemperature():
 #	global ds18b20
@@ -93,24 +94,29 @@ def sendMessage(messageBody):
                  )
 	print(message.sid)
 
+def reportTemperature():
+	currentTemp = readTemperature()
+	formatedTemp = "{:.2f} F".format(currentTemp)
+	# Output to the LCD
+	LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
+	print ("Current temperature : " + formatedTemp)
+
 def loop():
 	global startingTime
 	global sentReport
 	while True:
 		count = countIfOn()
 		currentTime = time.time()
-		
 		timeDifference = currentTime - startingTime
 		if (timeDifference > 20):
 			LCD1602.clear
-			currentTemp = readTemperature()
-			formatedTemp = "{:.2f} F".format(currentTemp)
+			reportTemperature()
 			#Output to the LCD
-			LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
+			
 			LCD1602.write(1, 1, 'Count = : ' + str(count))
 			#print to console
 			print ("Number of Times Started : " + str(count))
-			print ("Current temperature : " + formatedTemp)
+			
 			#reset the starting time
 			startingTime = time.time()
 		dateNow = datetime.datetime.now()
