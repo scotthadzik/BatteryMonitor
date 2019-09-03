@@ -24,7 +24,7 @@ timeOn = 0
 count = 0
 pushButton = 36 # BCM16 physical pin 36
 startingTime = time.time()
-temperatureMeasureFreq = 20 # Change this to the number of seconds that the temperature is measured
+temperatureMeasureFreq = 5 # Change this to the number of seconds that the temperature is measured
 motorTestFreq = 15 # Change this to the number of seconds that the pump voltage is checked
 motorTurnedOver = False # state of the pump
 motorStarterONAtTime = time.time()
@@ -43,9 +43,6 @@ def setup():
 	LCD1602.write(0, 0, 'Electrical')
 	LCD1602.write(1, 1, 'Trainer')
 	time.sleep(2)
-	
-	
-	
 
 def readTemperature():
 #	global ds18b20
@@ -92,17 +89,19 @@ def loop():
 	global startingTime
 	while True:
 		count = countIfOn()
-		
 		currentTime = time.time()
 		timeDifference = currentTime - startingTime
 		if (timeDifference > 20):
 			LCD1602.clear
 			currentTemp = readTemperature()
 			formatedTemp = "{:.2f} F".format(currentTemp)
-			print ("Current temperature : " + formatedTemp)
+			#Output to the LCD
 			LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
-			print ("Number of Times Started : " + str(count))
 			LCD1602.write(1, 1, 'Count = : ' + str(count))
+			#print to console
+			print ("Number of Times Started : " + str(count))
+			print ("Current temperature : " + formatedTemp)
+			#reset the starting time
 			startingTime = time.time()
 		
 		time.sleep(timeBetweenMeasurements)
