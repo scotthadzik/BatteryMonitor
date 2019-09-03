@@ -104,6 +104,8 @@ def sendMessage(messageBody):
 	print(message.sid)
 
 def reportTemperature():
+	global dayHighTemp
+	global dayLowTemp
 	currentTemp = readTemperature()
 	formatedTemp = "{:.2f} F".format(currentTemp)
 	# Output to the LCD
