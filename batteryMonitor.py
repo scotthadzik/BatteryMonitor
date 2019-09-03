@@ -41,7 +41,7 @@ sentReport = False
 
 
 def setup():
-	sendMessage("Pi has started")
+	# sendMessage("Pi has started") TODO: Remove this comment
 	ADC.setup(0x48)
 	global ds18b20
 	for i in os.listdir('/sys/bus/w1/devices'):
