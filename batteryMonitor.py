@@ -31,6 +31,15 @@ motorStarterONAtTime = time.time()
 motorStarterOffAtTime = time.time()
 motorStarterRunTime = time.time()
 
+reportTime1= datetime.time(8,00,00)
+reportTime2= datetime.time(12,00,00)
+reportTime3= datetime.time(16,00,00)
+reportTime4= datetime.time(18,00,00)
+reportTimeTest = datetime.time(18,50,00)
+
+sentReport = false
+
+
 def setup():
 	sendMessage("Pi has started")
 	ADC.setup(0x48)
@@ -103,13 +112,13 @@ def loop():
 			print ("Current temperature : " + formatedTemp)
 			#reset the starting time
 			startingTime = time.time()
-		
+		if(currentTime > reportTimeTest and sentReport == False)
+			print('sendSMS')
+			sendMessage('This is a voltage message')
 		time.sleep(timeBetweenMeasurements)
 		
 def destroy():
 	ADC.write(0)
-
-
 
 if __name__ == "__main__":
 	try:
