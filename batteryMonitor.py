@@ -142,7 +142,8 @@ def loop():
 		count = countIfOn()
 		currentTemperature = readTemperature()
 		for report in reports:
-			if (currentHour > report.time and report.reported == False):
+			testhour = 7 #TODO this is for testing time
+			if (testhour > report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
 				# sendMessage(message)
 				print (message)
