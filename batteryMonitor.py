@@ -110,11 +110,13 @@ def reportTemperature():
 	global dayLowTemp
 	currentTemp = readTemperature()
 	formatedTemp = "{:.2f} F".format(currentTemp)
+	formatedLowTemp = "{:.2f} F".format(dayHighTemp)
+	formatedHighTemp = "{:.2f} F".format(dayLowTemp)
 	# Output to the LCD
 	LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
 	print ("Current temperature : " + formatedTemp)
-	print ("High temperature today: " + dayHighTemp)
-	print ("Low temperature today: " + dayLowTemp)
+	print ("High temperature today: " + formatedHighTemp)
+	print ("Low temperature today: " + formatedLowTemp)
 	return formatedTemp
 
 def loop():
