@@ -35,6 +35,7 @@ motorStarterOffAtTime = time.time()
 motorStarterRunTime = time.time()
 dateNow = datetime.datetime.now()
 currentHour = dateNow.hour
+beginningOfTheDay = True
 
 reportTime= [8,12,16,20]#The hours of the day to send sms report
 index = 0 # report time index tracking
@@ -45,6 +46,7 @@ sentReport = False
 def setup():
 	# sendMessage("Pi has started") TODO: Remove this comment
 	global index
+	global beginningOfTheDay
 	ADC.setup(0x48)
 	global ds18b20
 	for i in os.listdir('/sys/bus/w1/devices'):
@@ -60,10 +62,13 @@ def setup():
 		index = 0
 	elif(currentHour <=reportTime[1]):
 		index = 1
+		beginningOfTheDay = False
 	elif(currentHour <= reportTime[2]):
 		index = 2
+		beginningOfTheDay = False
 	elif(currentHour <= reportTime[3]):
 		index = 3
+		beginningOfTheDay = False
 	print(index)#TODO for testing only
 
 
@@ -152,11 +157,11 @@ def loop():
 		# 	#reset the starting time
 		# 	startingTime = time.time()
 		
-		if(currentHour > reportTime[index]):
+		if(reportTime[index] > currentHour):
 			currentTemperature = reportTemperature()
 			print('sendSMS ' + currentTemperature + ' number of start times ' + str(count))
 			index = (index + 1 ) % len(reportTime)
-			print (index)
+			print ('index = ' + index)
 		
 		
 def destroy():
