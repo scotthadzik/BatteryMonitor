@@ -33,17 +33,18 @@ motorTurnedOver = False # state of the pump
 motorStarterONAtTime = time.time()
 motorStarterOffAtTime = time.time()
 motorStarterRunTime = time.time()
+dateNow = datetime.datetime.now()
+currentHour = dateNow.hour
 
-reportTime1= 8
-reportTime2= 12
-reportTime3= 16
-reportTime4= 20
+reportTime= [8,12,16,20]#The hours of the day to send sms report
+index = 0 # report time index tracking
 
 sentReport = False
 
 
 def setup():
 	# sendMessage("Pi has started") TODO: Remove this comment
+	global index
 	ADC.setup(0x48)
 	global ds18b20
 	for i in os.listdir('/sys/bus/w1/devices'):
@@ -55,6 +56,16 @@ def setup():
 	LCD1602.write(1, 1, 'Trainer')
 	time.sleep(2)
 	reportTemperature()
+	if (currentHour <=reportTime[0]): #This needs changed if the number of report times are changed
+		index = 0
+	elif(currentHour <=reportTime[1]):
+		index = 1
+	elif(currentHour <= reportTime[2]):
+		index = 2
+	elif(currentHour <= reportTime[3]):
+		index = 3
+	print(index)#TODO for testing only
+
 
 def readTemperature():
 #	global ds18b20
@@ -140,9 +151,8 @@ def loop():
 			
 			#reset the starting time
 			startingTime = time.time()
-		dateNow = datetime.datetime.now()
-		currentHour = dateNow.hour
-		if(currentHour > reportTime3 and sentReport == False):
+		
+		if(currentHour > reportTime[index] and sentReport == False):
 			currentTemperature = reportTemperature()
 			print('sendSMS ' + currentTemperature)
 			sentReport = True
