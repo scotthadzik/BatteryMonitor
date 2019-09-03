@@ -6,6 +6,7 @@ import os
 import sys
 from twilio.rest import Client
 import env as env
+from ReportTime import ReportTime
 
 
 # Your Account Sid and Auth Token from twilio.com/console
@@ -33,11 +34,21 @@ motorTurnedOver = False # state of the pump
 motorStarterONAtTime = time.time()
 motorStarterOffAtTime = time.time()
 motorStarterRunTime = time.time()
+shortestCrank = 500
+longestCrank = 0
+
 dateNow = datetime.datetime.now()
 currentHour = dateNow.hour
 beginningOfTheDay = True
 
-reportTime= [8,12,16,20]#The hours of the day to send sms report
+reports = [
+ReportTime(8,' 8:00 a.m. '),
+ReportTime(12,' 12:00 p.m. '),
+ReportTime(16,' 4:00 p.m. '),
+ReportTime(20,' 8:00 p.m. '),
+]
+
+
 index = 0 # report time index tracking
 
 sentReport = False
@@ -58,20 +69,6 @@ def setup():
 	LCD1602.write(1, 1, 'Trainer')
 	time.sleep(2)
 	reportTemperature()
-	print('current hour ' + str(currentHour))
-	if (currentHour <=reportTime[0]): #This needs changed if the number of report times are changed
-		index = 0
-	elif(currentHour <=reportTime[1]):
-		index = 1
-		beginningOfTheDay = False
-	elif(currentHour <= reportTime[2]):
-		index = 2
-		beginningOfTheDay = False
-	else:
-		index = 3
-		beginningOfTheDay = False
-	print(index)#TODO for testing only
-
 
 def readTemperature():
 #	global ds18b20
@@ -143,27 +140,22 @@ def loop():
 	global dayLowTemp
 	global index
 	while True:
-		currentTime = time.time() # set a value to track the current time to compare to the start time
 		count = countIfOn()
-		readTemperature()
-		timeDifference = currentTime - startingTime
-		# if (timeDifference > 20):
-		# 	LCD1602.clear
-		# 	reportTemperature()
-			
-		# 	LCD1602.write(1, 1, 'Count = : ' + str(count))
-		# 	#print to console
-		# 	print ("Number of Times Started : " + str(count))
-			
-		# 	#reset the starting time
-		# 	startingTime = time.time()
-		
-		if(reportTime[index] > currentHour):
-			currentTemperature = reportTemperature()
-			print('sendSMS ' + currentTemperature + ' number of start times ' + str(count))
-			index = (index + 1 ) % len(reportTime)
-			print ('index = ' + index)
-		
+		currentTemperature = readTemperature()
+		for report in reports:
+			if (currentHour > report,time and report.reported == False):
+				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
+				sendMessage(message)
+				report.reported = (True)
+
+
+def createMessageBody(report, temp, starts, hightemp, lowtemp):
+	message = 	(report.meridian + ' Report \n' +
+				'The current temperature is ' + temp + '\n' +
+				'The low temp was ' + lowtemp + '\n' +
+				'The high temp was ' + hightemp + '\n' +
+				'The engine was turned over ' + str(count) + ' times ')
+	return message
 		
 def destroy():
 	ADC.write(0)
