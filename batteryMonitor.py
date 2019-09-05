@@ -16,7 +16,7 @@ import RPi.GPIO as GPIO
 #Twilio Credentials
 auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
-numbers = [env.TestSMS_Number, env.SecondTestSMS_Number]
+numbers = [env.TestSMS_Number]
 
 client = Client(account_sid, auth_token)
 
