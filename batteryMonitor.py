@@ -151,7 +151,14 @@ def loop():
 				sendMessage(message)
 				print (message)
 				report.reported = True
+				count = 0 #reset the count for the report
+
 		testhour = testhour + 1
+		if testhour == 24: #TODO Delete
+			testhour = 0
+
+		if testhour >= 0:
+			startNewDay(reports)
 		time.sleep(2) #TODO delete
 
 
@@ -165,10 +172,20 @@ def createMessageBody(report, temp, starts, hightemp, lowtemp):
 	highTempString = 'The high temp was ' + formatedHighTemp + '\n'
 	engineStartsStrings = 'The engine was turned over ' + str(starts) + ' times '
 
-	message = 	(report.meridian + ' Report ' + '\n ' + currentTempString + lowTempString + highTempString + engineStartsStrings)
+	message = 	(report.meridian + ' Report ' + '\n' + currentTempString + lowTempString + highTempString + engineStartsStrings)
 
 	return message
-		
+
+def startNewDay(reports):
+	global dayLowTemp
+	global dayHighTemp
+	for report in reports:
+		report.reported = False
+		dayLowTemp = 200
+		dayHighTemp = -50	
+
+
+
 def destroy():
 	ADC.write(0)
 
