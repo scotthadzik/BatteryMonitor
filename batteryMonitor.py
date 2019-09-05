@@ -56,10 +56,6 @@ index = 0 # report time index tracking
 
 def setup():
 	# sendMessage("Pi has started") TODO: Remove this comment
-	GPIO.setmode(GPIO.BOARD)
-	GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-	GPIO.add_event_detect(13, GPIO.BOTH, callback=button_callback, bouncetime = 200)
-	
 	global index
 	global beginningOfTheDay
 	ADC.setup(0x48)
