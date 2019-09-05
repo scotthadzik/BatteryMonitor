@@ -16,6 +16,7 @@ import RPi.GPIO as GPIO
 #Twilio Credentials
 auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
+numbers = [env.TestSMS_Number, env.SecondTestSMS_Number]
 
 client = Client(account_sid, auth_token)
 
@@ -111,11 +112,12 @@ def countIfOn():
 	return count
 
 def sendMessage(messageBody):
-	message = client.messages \
+	for number in numbers:
+		message = client.messages \
                 .create(
                      body=messageBody,
                      from_=env.PI_Number,
-                     to=env.SMS_Number
+                     to=number
                  )
 	print(message.sid)
 
