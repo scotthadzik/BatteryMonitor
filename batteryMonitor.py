@@ -58,7 +58,7 @@ def setup():
 	# sendMessage("Pi has started") TODO: Remove this comment
 	GPIO.setmode(GPIO.BOARD)
 	GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-	GPIO.add_event_detect(13, GPIO.RISING,vcallback=button_callback)
+	GPIO.add_event_detect(13, GPIO.RISING, callback=button_callback)
 	
 	global index
 	global beginningOfTheDay
