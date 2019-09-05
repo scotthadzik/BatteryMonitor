@@ -147,7 +147,7 @@ def loop():
 			
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
-				# sendMessage(message)
+				sendMessage(message)
 				print (message)
 				report.reported = True
 				count = 0 #reset the count for the report
