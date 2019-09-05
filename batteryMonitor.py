@@ -143,23 +143,20 @@ def loop():
 	while True:
 		count = countIfOn()
 		currentTemperature = readTemperature()
-		print (testhour)
+		print (currentHour)
 		for report in reports:
 			
-			if (testhour >= report.time and report.reported == False):
+			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
-				sendMessage(message)
+				# sendMessage(message)
 				print (message)
 				report.reported = True
 				count = 0 #reset the count for the report
+		
 
-		testhour = testhour + 1
-		if testhour == 24: #TODO Delete
-			testhour = 0
-
-		if testhour == 0:
+		if currentHour == 0:
 			startNewDay(reports)
-		time.sleep(2) #TODO delete
+		
 
 
 def createMessageBody(report, temp, starts, hightemp, lowtemp):
