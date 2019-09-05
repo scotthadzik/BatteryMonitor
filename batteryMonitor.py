@@ -165,7 +165,7 @@ def createMessageBody(report, temp, starts, hightemp, lowtemp):
 	highTempString = 'The high temp was ' + formatedHighTemp + '\n'
 	engineStartsStrings = 'The engine was turned over ' + str(starts) + ' times '
 
-	message = 	(report.meridian + ' Report ' + '\n ' + currentTempString, lowTempString, highTempString, engineStartsStrings)
+	message = 	(report.meridian + ' Report ' + '\n ' + currentTempString + lowTempString + highTempString + engineStartsStrings)
 
 	return message
 		
