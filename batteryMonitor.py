@@ -148,7 +148,7 @@ def loop():
 			
 			if (testhour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
-				# sendMessage(message)
+				sendMessage(message)
 				print (message)
 				report.reported = True
 		testhour = testhour + 1
@@ -165,7 +165,7 @@ def createMessageBody(report, temp, starts, hightemp, lowtemp):
 	highTempString = 'The high temp was ' + formatedHighTemp + '\n'
 	engineStartsStrings = 'The engine was turned over ' + str(starts) + ' times '
 
-	message = 	(report.meridian + ' Report ' + '\n' + currentTempString, lowTempString, highTempString, engineStartsStrings)
+	message = 	(report.meridian + ' Report ' + '\n ' + currentTempString, lowTempString, highTempString, engineStartsStrings)
 
 	return message
 		
