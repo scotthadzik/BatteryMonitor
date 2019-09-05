@@ -156,7 +156,7 @@ def loop():
 
 
 def createMessageBody(report, temp, starts, hightemp, lowtemp):
-	formatedTemp = "{:.2f} F".format(currentTemp)
+	formatedTemp = "{:.2f} F".format(temp)
 	formatedLowTemp = "{:.2f} F".format(dayLowTemp)
 	formatedHighTemp = "{:.2f} F".format(hightemp)
 	# Output to the LCD
