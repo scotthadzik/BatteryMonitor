@@ -68,6 +68,7 @@ def setup():
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Battery Monitor')
 	reportTemperature()
+	sendMessage('test')
 
 def button_callback(channel):
     print("Button was pushed!")
@@ -149,7 +150,7 @@ def loop():
 			
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
-				sendMessage(message)
+				# sendMessage(message) TODO uncomment for production
 				print (message)
 				report.reported = True
 				count = 0 #reset the count for the report
