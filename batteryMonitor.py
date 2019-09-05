@@ -58,7 +58,7 @@ def setup():
 	# sendMessage("Pi has started") TODO: Remove this comment
 	GPIO.setmode(GPIO.BOARD)
 	GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-	GPIO.add_event_detect(13, GPIO.RISING, callback=button_callback)
+	GPIO.add_event_detect(13, GPIO.BOTH, callback=button_callback, bouncetime = 200)
 	
 	global index
 	global beginningOfTheDay
@@ -151,7 +151,7 @@ def loop():
 			
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
-				sendMessage(message)
+				# sendMessage(message)
 				print (message)
 				report.reported = True
 				count = 0 #reset the count for the report
