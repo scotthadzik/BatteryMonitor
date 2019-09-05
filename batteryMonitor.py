@@ -157,7 +157,7 @@ def loop():
 		if testhour == 24: #TODO Delete
 			testhour = 0
 
-		if testhour >= 0:
+		if testhour == 0:
 			startNewDay(reports)
 		time.sleep(2) #TODO delete
 
