@@ -7,6 +7,7 @@ import sys
 from twilio.rest import Client
 import env as env
 from ReportTime import ReportTime
+import RPi.GPIO as GPIO
 
 
 # Your Account Sid and Auth Token from twilio.com/console
@@ -52,11 +53,12 @@ ReportTime(20,' 8:00 p.m. '),
 
 index = 0 # report time index tracking
 
-sentReport = False
-
 
 def setup():
 	# sendMessage("Pi has started") TODO: Remove this comment
+	GPIO.setmode(GPIO.BOARD)
+	GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+	GPIO.add_event_detect(27,GPIO.RISING,callback=button_callback)
 	global index
 	global beginningOfTheDay
 	ADC.setup(0x48)
@@ -66,11 +68,11 @@ def setup():
 			ds18b20 = i
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.clear
-	LCD1602.write(0, 0, 'Electrical')
-	LCD1602.write(1, 1, 'Trainer')
-	time.sleep(2)
+	LCD1602.write(0, 0, 'Battery Monitor')
 	reportTemperature()
 
+def button_callback(channel):
+    print("Button was pushed!")
 def readTemperature():
 #	global ds18b20
 	global dayHighTemp
@@ -143,12 +145,12 @@ def loop():
 	while True:
 		count = countIfOn()
 		currentTemperature = readTemperature()
-		print (currentHour)
+		# print (currentHour)
 		for report in reports:
 			
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
-				# sendMessage(message)
+				sendMessage(message)
 				print (message)
 				report.reported = True
 				count = 0 #reset the count for the report
@@ -156,8 +158,6 @@ def loop():
 
 		if currentHour == 0:
 			startNewDay(reports)
-		
-
 
 def createMessageBody(report, temp, starts, hightemp, lowtemp):
 	formatedTemp = "{:.2f} F".format(temp)
