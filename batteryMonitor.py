@@ -16,7 +16,7 @@ import RPi.GPIO as GPIO
 #Twilio Credentials
 auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
-numbers = [env.TestSMS_Number]
+numbers = [env.TestSMS_Number] # , PrimarySMS_Number, SecondarySMS_Number]
 
 client = Client(account_sid, auth_token)
 
@@ -68,7 +68,7 @@ def setup():
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Battery Monitor')
 	reportTemperature()
-	sendMessage('test')
+	sendMessage('The monitor has started')
 
 def button_callback(channel):
     print("Button was pushed!")
@@ -141,7 +141,7 @@ def loop():
 	global dayHighTemp
 	global dayLowTemp
 	global index
-	global testhour #TODO remove this test
+	global testhour 
 	while True:
 		count = countIfOn()
 		currentTemperature = readTemperature()
@@ -150,7 +150,7 @@ def loop():
 			
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
-				# sendMessage(message) TODO uncomment for production
+				sendMessage(message) #TODO uncomment for production
 				print (message)
 				report.reported = True
 				count = 0 #reset the count for the report
