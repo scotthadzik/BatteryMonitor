@@ -104,7 +104,7 @@ def countIfOn():
 		motorStarterOffAtTime = time.time()
 		motorStarterRunTime = (motorStarterOffAtTime - motorStarterONAtTime) / 60
 		formattedMotorRunTime = round(motorStarterRunTime,2)
-		motorRunMessage = (' Motor ran for ' + formattedMotorRunTime + ' minutes')
+		motorRunMessage = (' Motor ran for ' + str(formattedMotorRunTime) + ' minutes')
 		print (motorRunMessage)
 		# sendMessage(motorRunMessage) TODO remove comment
 	return count
