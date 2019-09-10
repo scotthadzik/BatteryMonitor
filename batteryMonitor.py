@@ -103,7 +103,9 @@ def countIfOn():
 		motorTurnedOver = False
 		motorStarterOffAtTime = time.time()
 		motorStarterRunTime = motorStarterOffAtTime - motorStarterONAtTime
-		print(' Starter ran for ' + str(motorStarterRunTime) + ' seconds')
+		motorRunMessage = (' Motor ran for ' + str(motorStarterRunTime) + ' seconds')
+		print (motorRunMessage)
+		sendMessage(motorRunMessage)
 	return count
 
 def sendMessage(messageBody):
@@ -131,7 +133,6 @@ def reportTemperature():
 
 def loop():
 	global startingTime
-	global sentReport
 	global dayHighTemp
 	global dayLowTemp
 	global index
@@ -143,7 +144,7 @@ def loop():
 		for report in reports:
 			
 			if (currentHour >= report.time and report.reported == False):
-				message = createMessageBody(report, currentTemperature, count, dayHighTemp, dayLowTemp)
+				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
 				sendMessage(message) #TODO uncomment for production
 				print (message)
 				report.reported = True
@@ -153,7 +154,7 @@ def loop():
 		if currentHour == 0:
 			startNewDay(reports)
 
-def createMessageBody(report, temp, starts, hightemp, lowtemp):
+def createMessageBody(report, temp, hightemp, lowtemp):
 	formatedTemp = "{:.2f} F".format(temp)
 	formatedLowTemp = "{:.2f} F".format(dayLowTemp)
 	formatedHighTemp = "{:.2f} F".format(hightemp)
