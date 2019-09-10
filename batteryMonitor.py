@@ -62,7 +62,7 @@ def setup():
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Battery Monitor')
 	reportTemperature()
-	sendMessage('The monitor has started')
+	# sendMessage('The monitor has started') TODO remove comment
 
 def button_callback(channel):
     print("Button was pushed!")
@@ -106,7 +106,7 @@ def countIfOn():
 		formatedMinutes = f'{motorStarterRunTime:.2f}'
 		motorRunMessage = (' Motor ran for ' + formatedMinutes + ' minutes')
 		print (motorRunMessage)
-		sendMessage(motorRunMessage)
+		# sendMessage(motorRunMessage) TODO remove comment
 	return count
 
 def sendMessage(messageBody):
@@ -128,7 +128,6 @@ def reportTemperature():
 	
 	LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
 	print ("Current temperature : " + formatedTemp)
-	# print ("High temperature today: " + formatedHighTemp)
 	print ("Low temperature today: " + formatedLowTemp)
 	return formatedTemp
 
@@ -139,19 +138,17 @@ def loop():
 	global index
 	global testhour 
 	while True:
-		count = countIfOn()
+		countIfOn()
 		currentTemperature = readTemperature()
 		# print (currentHour)
 		for report in reports:
 			
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
-				sendMessage(message) #TODO uncomment for production
+				# sendMessage(message) #TODO uncomment for production
 				print (message)
 				report.reported = True
-				count = 0 #reset the count for the report
 		
-
 		if currentHour == 0:
 			startNewDay(reports)
 
