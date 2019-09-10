@@ -13,6 +13,7 @@ import RPi.GPIO as GPIO
 auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
 #numbers = [env.TestSMS_Number,env.PrimarySMS_Number,env.SecondarySMS_Number]
+numbers = [env.TestSMS_Number]
 
 client = Client(account_sid, auth_token)
 
