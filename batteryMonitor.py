@@ -58,8 +58,8 @@ def setup():
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Battery Monitor')
-	sendMessage('The monitor has started') TODO remove comment
-
+	sendMessage('The monitor has started')
+	
 def button_callback(channel):
     print("Button was pushed!")
 def readTemperature():
