@@ -109,7 +109,7 @@ def countIfOn():
 		formattedMotorRunTime = round(engineTimeRunningSeconds,2)
 		
 		engineStartTimeOfDayString = ('Engine on at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
-		motorRunTime = (' Engine ran for ' + str(formattedMotorRunTime) + ' minutes' + '\n')
+		motorRunTime = ('Engine ran for ' + str(formattedMotorRunTime) + ' minutes' + '\n')
 		
 		motorRunMessage = (engineStartTimeOfDayString + motorRunTime + tempString)
 		print (motorRunMessage)
@@ -160,16 +160,8 @@ def loop():
 			startNewDay(reports)
 
 def createMessageBody(report, temp, hightemp, lowtemp):
-	formatedTemp = formatTemperature(temp)
-	formatedLowTemp = formatTemperature(dayLowTemp)
-	formatedHighTemp = formatTemperature(hightemp)
-	# Output to the LCD
-	currentTempString = 'The current temperature is ' + formatedTemp + '\n'
-	lowTempString = 'The low temp was ' + str(formatedLowTemp) + '\n'
-	highTempString = 'The high temp was ' + formatedHighTemp + '\n'
-
-	message = 	(report.meridian + ' Report ' + '\n' + currentTempString + lowTempString + highTempString)
-
+	tempString = createTempString() # Get the current temp string
+	message = 	(report.meridian + ' Report ' + '\n' + tempString)
 	return message
 
 def formatTemperature(temp):
