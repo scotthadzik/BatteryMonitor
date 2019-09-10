@@ -103,7 +103,7 @@ def countIfOn():
 		motorTurnedOver = False
 		motorStarterOffAtTime = time.time()
 		motorStarterRunTime = (motorStarterOffAtTime - motorStarterONAtTime) / 60
-		motorRunMessage = (' Motor ran for ' + f"{motorStarterRunTime:.2f}" + ' minutes')
+		motorRunMessage = (' Motor ran for {motorStarterRunTime:.2f} minutes')
 		print (motorRunMessage)
 		# sendMessage(motorRunMessage) TODO remove comment
 	return count
