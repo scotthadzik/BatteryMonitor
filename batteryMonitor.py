@@ -58,7 +58,7 @@ def setup():
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Battery Monitor')
-	# sendMessage('The monitor has started') TODO remove comment
+	sendMessage('The monitor has started') TODO remove comment
 
 def button_callback(channel):
     print("Button was pushed!")
@@ -109,7 +109,7 @@ def countIfOn():
 		
 		motorRunMessage = (engineStartTimeOfDayString + motorRunTime + tempString)
 		print (motorRunMessage)
-		# sendMessage(motorRunMessage) TODO remove comment
+		sendMessage(motorRunMessage) TODO remove comment
 	return count
 
 def sendMessage(messageBody):
