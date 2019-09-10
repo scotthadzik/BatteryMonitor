@@ -46,7 +46,6 @@ ReportTime(18,' 6:00 p.m. '),
 
 index = 0 # report time index tracking
 
-
 def setup():
 	# sendMessage("Pi has started") TODO: Remove this comment
 	global index
@@ -59,7 +58,6 @@ def setup():
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Battery Monitor')
-	reportTemperature()
 	# sendMessage('The monitor has started') TODO remove comment
 
 def button_callback(channel):
@@ -94,8 +92,6 @@ def countIfOn():
 	readAIN0 = ADC.read(0)
 	engineStartTimeOfDay = datetime.datetime.now()
 
-	
-
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and engineTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
 		engineOnTimeInSeconds = time.time()
@@ -126,18 +122,6 @@ def sendMessage(messageBody):
                  )
 	print(message.sid)
 
-def reportTemperature():
-	global dayHighTemp
-	global dayLowTemp
-	currentTemp = readTemperature()
-	formatedTemp = "{:.2f} F".format(currentTemp)
-	formatedLowTemp = "{:.2f} F".format(dayLowTemp)
-	
-	LCD1602.write(0, 0, 'Temp = : ' + formatedTemp)
-	print ("Current temperature : " + formatedTemp)
-	print ("Low temperature today: " + formatedLowTemp)
-	return formatedTemp
-
 def loop():
 	global startingTime
 	global dayHighTemp
@@ -148,14 +132,12 @@ def loop():
 		countIfOn()
 		currentTemperature = readTemperature()
 		# print (currentHour)
-		for report in reports:
-			
+		for report in reports:			
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
 				# sendMessage(message) #TODO uncomment for production
 				print (message)
-				report.reported = True
-		
+				report.reported = True	
 		if currentHour == 0:
 			startNewDay(reports)
 
@@ -185,8 +167,6 @@ def startNewDay(reports):
 		report.reported = False
 		dayLowTemp = 200
 		dayHighTemp = -50	
-
-
 
 def destroy():
 	ADC.write(0)
