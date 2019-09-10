@@ -29,12 +29,10 @@ dayLowTemp = 200
 dayHighTemp = -50
 
 motorTestFreq = 15 # Change this to the number of seconds that the pump voltage is checked
-motorTurnedOver = False # state of the pump
-motorStarterONAtTime = time.time()
-motorStarterOffAtTime = time.time()
-motorStarterRunTime = time.time()
-shortestCrank = 500
-longestCrank = 0
+engineTurnedOver = False # state of the pump
+engineOnTimeInSeconds = time.time()
+engineOffTimeInSeconds = time.time()
+engineTimeRunningSeconds = time.time()
 
 dateNow = datetime.datetime.now()
 currentHour = dateNow.hour
@@ -86,28 +84,25 @@ def readTemperature():
 	return temperature
 
 def countIfOn():
-	global count
-	global motorTurnedOver
-	global motorStarterONAtTime
-	global motorStarterOffAtTime
-	global motorStarterRunTime
-	global dayHighTemp
-	global dayLowTemp
+	global engineTurnedOver
+	global engineOnTimeInSeconds
+	global engineOffTimeInSeconds
+	global engineTimeRunningSeconds
 	readAIN0 = ADC.read(0)
+
 	voltage = readAIN0 # More accurate near 12 V
-	if voltage > 50 and motorTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
-		count +=1
-		motorStarterONAtTime = time.time()
-		motorTurnedOver = True
-	if voltage < 50 and motorTurnedOver == True: # The motor turned over, but now it is not turning over
-		motorTurnedOver = False
-		motorStarterOffAtTime = time.time()
-		motorStarterRunTime = (motorStarterOffAtTime - motorStarterONAtTime) / 60
-		formattedMotorRunTime = round(motorStarterRunTime,2)
-		motorStartTime = ('The engine started at ' + str(motorStarterONAtTime) + '\n')
-		motorOffTime = ('The engine turned off at ' + str(motorStarterOffAtTime) + '\n')
-		motorRunTime = (' Motor ran for ' + str(formattedMotorRunTime) + ' minutes' + '\n')
-		motorRunMessage = (motorStartTime + motorOffTime + motorRunTime)
+	if voltage > 50 and engineTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
+		engineOnTimeInSeconds = time.time()
+		engineStartTimeOfDay = datetime.datetime.now()
+		engineTurnedOver = True
+	if voltage < 50 and engineTurnedOver == True: # The motor turned over, but now it is not turning over
+		engineTurnedOver = False
+		engineOffTimeInSeconds = time.time()
+		engineTimeRunningSeconds = (engineOffTimeInSeconds - engineOnTimeInSeconds) / 60
+		formattedMotorRunTime = round(engineTimeRunningSeconds,2)
+		engineStartTimeOfDayString = ('Engine on at ' + engineStartTimeOfDay + '\n')
+		motorRunTime = (' Engine ran for ' + str(formattedMotorRunTime) + ' minutes')
+		motorRunMessage = (engineStartTimeOfDayString + motorRunTime)
 		print (motorRunMessage)
 		# sendMessage(motorRunMessage) TODO remove comment
 	return count
