@@ -9,10 +9,6 @@ import env as env
 from ReportTime import ReportTime
 import RPi.GPIO as GPIO
 
-
-# Your Account Sid and Auth Token from twilio.com/console
-# DANGER! This is insecure. See http://twil.io/secure
-
 #Twilio Credentials
 auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
