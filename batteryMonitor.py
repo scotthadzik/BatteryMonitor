@@ -42,12 +42,9 @@ testhour = 8 #TODO this is for testing time
 beginningOfTheDay = True
 
 reports = [
-ReportTime(8,' 8:00 a.m. '),
-ReportTime(12,' 12:00 p.m. '),
-ReportTime(16,' 4:00 p.m. '),
-ReportTime(20,' 8:00 p.m. '),
+ReportTime(6,' 6:00 a.m. '),
+ReportTime(18,' 6:00 p.m. '),
 ]
-
 
 index = 0 # report time index tracking
 
@@ -164,9 +161,8 @@ def createMessageBody(report, temp, starts, hightemp, lowtemp):
 	currentTempString = 'The current temperature is ' + formatedTemp + '\n'
 	lowTempString = 'The low temp was ' + str(formatedLowTemp) + '\n'
 	highTempString = 'The high temp was ' + formatedHighTemp + '\n'
-	engineStartsStrings = 'The engine was turned over ' + str(starts) + ' times '
 
-	message = 	(report.meridian + ' Report ' + '\n' + currentTempString + lowTempString + highTempString + engineStartsStrings)
+	message = 	(report.meridian + ' Report ' + '\n' + currentTempString + lowTempString + highTempString)
 
 	return message
 
