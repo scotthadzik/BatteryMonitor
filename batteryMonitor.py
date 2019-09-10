@@ -88,8 +88,13 @@ def countIfOn():
 	global engineOnTimeInSeconds
 	global engineOffTimeInSeconds
 	global engineTimeRunningSeconds
+	global dayHighTemp
+	global dayLowTemp
+	
 	readAIN0 = ADC.read(0)
 	engineStartTimeOfDay = datetime.datetime.now()
+
+	
 
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and engineTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
@@ -97,13 +102,16 @@ def countIfOn():
 		engineStartTimeOfDay = datetime.datetime.now() # set the time that the engine started
 		engineTurnedOver = True
 	if voltage < 50 and engineTurnedOver == True: # The motor turned over, but now it is not turning over
+		tempString = createTempString() # Get the current temp string
 		engineTurnedOver = False
 		engineOffTimeInSeconds = time.time()
 		engineTimeRunningSeconds = (engineOffTimeInSeconds - engineOnTimeInSeconds) / 60
 		formattedMotorRunTime = round(engineTimeRunningSeconds,2)
+		
 		engineStartTimeOfDayString = ('Engine on at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
 		motorRunTime = (' Engine ran for ' + str(formattedMotorRunTime) + ' minutes')
-		motorRunMessage = (engineStartTimeOfDayString + motorRunTime)
+		
+		motorRunMessage = (engineStartTimeOfDayString + motorRunTime + tempString)
 		print (motorRunMessage)
 		# sendMessage(motorRunMessage) TODO remove comment
 	return count
@@ -152,9 +160,9 @@ def loop():
 			startNewDay(reports)
 
 def createMessageBody(report, temp, hightemp, lowtemp):
-	formatedTemp = "{:.2f} F".format(temp)
-	formatedLowTemp = "{:.2f} F".format(dayLowTemp)
-	formatedHighTemp = "{:.2f} F".format(hightemp)
+	formatedTemp = formatTemperature(temp)
+	formatedLowTemp = formatTemperature(dayLowTemp)
+	formatedHighTemp = formatTemperature(hightemp)
 	# Output to the LCD
 	currentTempString = 'The current temperature is ' + formatedTemp + '\n'
 	lowTempString = 'The low temp was ' + str(formatedLowTemp) + '\n'
@@ -163,6 +171,20 @@ def createMessageBody(report, temp, hightemp, lowtemp):
 	message = 	(report.meridian + ' Report ' + '\n' + currentTempString + lowTempString + highTempString)
 
 	return message
+
+def formatTemperature(temp):
+	return "{:.2f} F".format(temp)
+
+def createTempString():
+	temp = readTemperature()
+	formTemp = formatTemperature(temp)
+	formHiTemp = formatTemperature(dayHighTemp)
+	formLowTemp = formatTemperature(dayLowTemp)
+	currentTempString = 'The current temperature is ' + formTemp + '\n'
+	lowTempString = 'The low temp was ' + str(formLowTemp) + '\n'
+	highTempString = 'The high temp was ' + formHiTemp + '\n'
+	tempString = (currentTempString + lowTempString + highTempString)
+	return (tempString)
 
 def startNewDay(reports):
 	global dayLowTemp
