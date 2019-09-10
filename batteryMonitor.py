@@ -109,7 +109,7 @@ def countIfOn():
 		formattedMotorRunTime = round(engineTimeRunningSeconds,2)
 		
 		engineStartTimeOfDayString = ('Engine on at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
-		motorRunTime = (' Engine ran for ' + str(formattedMotorRunTime) + ' minutes')
+		motorRunTime = (' Engine ran for ' + str(formattedMotorRunTime) + ' minutes' + '\n')
 		
 		motorRunMessage = (engineStartTimeOfDayString + motorRunTime + tempString)
 		print (motorRunMessage)
