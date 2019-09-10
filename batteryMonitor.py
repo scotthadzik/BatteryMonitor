@@ -89,11 +89,12 @@ def countIfOn():
 	global engineOffTimeInSeconds
 	global engineTimeRunningSeconds
 	readAIN0 = ADC.read(0)
+	engineStartTimeOfDay = datetime.datetime.now()
 
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and engineTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
 		engineOnTimeInSeconds = time.time()
-		engineStartTimeOfDay = datetime.datetime.now()
+		engineStartTimeOfDay = datetime.datetime.now() # set the time that the engine started
 		engineTurnedOver = True
 	if voltage < 50 and engineTurnedOver == True: # The motor turned over, but now it is not turning over
 		engineTurnedOver = False
