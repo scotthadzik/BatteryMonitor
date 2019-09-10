@@ -102,8 +102,8 @@ def countIfOn():
 	if voltage < 50 and motorTurnedOver == True: # The motor turned over, but now it is not turning over
 		motorTurnedOver = False
 		motorStarterOffAtTime = time.time()
-		motorStarterRunTime = motorStarterOffAtTime - motorStarterONAtTime
-		motorRunMessage = (' Motor ran for ' + str(motorStarterRunTime) + ' seconds')
+		motorStarterRunTime = (motorStarterOffAtTime - motorStarterONAtTime) * 60
+		motorRunMessage = (' Motor ran for ' + str(motorStarterRunTime) + ' minutes')
 		print (motorRunMessage)
 		sendMessage(motorRunMessage)
 	return count
