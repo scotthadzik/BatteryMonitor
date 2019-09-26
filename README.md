@@ -14,7 +14,8 @@ Run this before running program
 Tutorial for connecting avnet M14A2A board to rasp pi 3
 http://cloudconnectkits.org/sites/default/files/GettingStartedGuide_Pi3_LTE_rv1-3_0_0.pdf
 
-
+M2M Codes
+https://m2msupport.net/m2msupport/atcreg-network-registration/
 
 
 SMS Setup
