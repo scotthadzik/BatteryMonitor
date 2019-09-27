@@ -41,7 +41,7 @@ beginningOfTheDay = True
 
 reports = [
 ReportTime(9,' 9:00 a.m. '),
-ReportTime(10,' 10:00 p.m. '),
+ReportTime(10,' 10:00 a.m. '),
 ReportTime(11,' 11:00 a.m. '),
 ReportTime(12,' 12:00 p.m. '),
 ReportTime(13,' 1:00 p.m. '),
@@ -144,6 +144,7 @@ def loop():
 		countIfOn()
 		currentTemperature = readTemperature()
 		# print (currentHour)
+		currentHour = dateNow.hour
 		for report in reports:			
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
