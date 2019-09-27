@@ -40,8 +40,20 @@ testhour = 8 #TODO this is for testing time
 beginningOfTheDay = True
 
 reports = [
-ReportTime(6,' 6:00 a.m. '),
+ReportTime(9,' 9:00 a.m. '),
+ReportTime(10,' 10:00 p.m. '),
+ReportTime(11,' 11:00 a.m. '),
+ReportTime(12,' 12:00 p.m. '),
+ReportTime(13,' 1:00 p.m. '),
+ReportTime(14,' 2:00 p.m. '),
+ReportTime(15,' 3:00 p.m. '),
+ReportTime(16,' 4:00 p.m. '),
+ReportTime(17,' 5:00 p.m. '),
 ReportTime(18,' 6:00 p.m. '),
+ReportTime(19,' 7:00 p.m. '),
+ReportTime(20,' 8:00 p.m. '),
+ReportTime(21,' 9:00 p.m. '),
+ReportTime(22,' 10:00 p.m. ')
 ]
 
 index = 0 # report time index tracking
@@ -137,7 +149,10 @@ def loop():
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
 				sendMessage(message) #TODO uncomment for production
 				print (message)
-				report.reported = True	
+				report.reported = True
+				#TODO for testing erase after
+				print ('The current Hour is : ' + str(currentHour))
+				print (report.meridian + ' report ' + 'is ' + report.reported)	
 		if currentHour == 0:
 			startNewDay(reports)
 
@@ -166,7 +181,9 @@ def startNewDay(reports):
 	for report in reports:
 		report.reported = False
 		dayLowTemp = 200
-		dayHighTemp = -50	
+		dayHighTemp = -50
+		print ('The current Hour is : ' + str(currentHour))
+		print (report.meridian + ' report ' + 'is ' + report.reported)	
 
 def destroy():
 	ADC.write(0)
