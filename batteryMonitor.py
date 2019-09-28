@@ -138,7 +138,6 @@ def loop():
 	global startingTime
 	global dayHighTemp
 	global dayLowTemp
-	global index
 	global testhour
 	global currentHour
 	while True:
@@ -157,8 +156,12 @@ def loop():
 				print ('The current Hour is : ' + str(currentHour))
 				print (report.meridian + ' report ' + 'is ' + str(report.reported))
 		
-		if currentHour == 0:
+		if (currentHour == 0 and beginningOfTheDay == True):
+			beginningOfTheDay = False
 			startNewDay(reports)
+		if (currentHour == 1):
+			beginningOfTheDay = True
+
 
 def createMessageBody(report, temp, hightemp, lowtemp):
 	tempString = createTempString() # Get the current temp string
