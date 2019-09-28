@@ -145,7 +145,8 @@ def loop():
 		currentTemperature = readTemperature()
 		# print (currentHour)
 		currentHour = dateNow.hour
-		for report in reports:			
+		for report in reports:
+			print(str(currentHour) + ' hour')			
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
 				sendMessage(message) #TODO uncomment for production
