@@ -144,14 +144,11 @@ def loop():
 		currentHour = dateNow.hour #Get the hour to determine need for report
 		for report in reports:		
 			if (currentHour >= report.time and report.reported == False): #If it's the hour to report and it has not been reported yet
+				report.reported = True
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
 				sendMessage(message) #TODO uncomment for production
 				print (message)
-				report.reported = True
-				#TODO for testing erase after
-				print ('The current Hour is : ' + str(currentHour))
-				print (report.meridian + ' report ' + 'is ' + str(report.reported))
-		
+				
 		if (currentHour == 0 and beginningOfTheDay == True):
 			beginningOfTheDay = False
 			startNewDay(reports)
