@@ -12,32 +12,33 @@ import RPi.GPIO as GPIO
 #Twilio Credentials
 auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
-#numbers = [env.TestSMS_Number,env.PrimarySMS_Number,env.SecondarySMS_Number]
-numbers = [env.TestSMS_Number]
-
+#numbers = [env.TestSMS_Number,env.PrimarySMS_Number,env.SecondarySMS_Number] #TODO uncomment for production
+numbers = [env.TestSMS_Number] #TODO COMMENT FOR PRODUCTION	
 client = Client(account_sid, auth_token)
 
-timeBetweenMeasurements = 1
-voltage = 0
+
+#Temperature Sense
 ds18b20 = ''
-timeOn = 0
-count = 0
-pushButton = 36 # BCM16 physical pin 36
-startingTime = time.time()
-temperatureMeasureFreq = 5 # Change this to the number of seconds that the temperature is measured
-dayLowTemp = 200
+dayLowTemp = 200 # set the initial temperatures to a higher and lower than normal
 dayHighTemp = -50
 
-motorTestFreq = 15 # Change this to the number of seconds that the pump voltage is checked
-engineTurnedOver = False # state of the pump
+#Voltage Sense
+voltage = 0 #set the initial voltage to zero. voltage is used to report when the motor power is turned on
+engineTurnedOver = False # initial state of the engine
 engineOnTimeInSeconds = time.time()
 engineOffTimeInSeconds = time.time()
 engineTimeRunningSeconds = time.time()
 
+#pushbutton -- Currently not used
+pushButton = 36 # BCM16 physical pin 36
+
+#date and time
 dateNow = datetime.datetime.now()
 currentHour = dateNow.hour
-testhour = 8 #TODO this is for testing time
+dateNow = datetime.datetime.now()
+currentHour = dateNow.hour
 beginningOfTheDay = True
+#currentHour = 8 #TODO this is for testing time
 
 reports = [
 ReportTime(6,' 6:00 a.m. '),
@@ -59,27 +60,22 @@ ReportTime(21,' 9:00 p.m. '),
 ReportTime(22,' 10:00 p.m. ')
 ]
 
-index = 0 # report time index tracking
 
 def setup():
-	# sendMessage("Pi has started") TODO: Remove this comment
-	global index
 	global beginningOfTheDay
 	ADC.setup(0x48)
 	global ds18b20
+	
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
 			ds18b20 = i
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Battery Monitor')
-	# sendMessage('The monitor has started')
+	# sendMessage('The monitor has started') #TODO remove comment
 	print ('The monitor has started')
 
-def button_callback(channel):
-    print("Button was pushed!")
 def readTemperature():
-#	global ds18b20
 	global dayHighTemp
 	global dayLowTemp
 	location = '/sys/bus/w1/devices/' + ds18b20 + '/w1_slave'
@@ -109,11 +105,11 @@ def countIfOn():
 	engineStartTimeOfDay = datetime.datetime.now()
 
 	voltage = readAIN0 # More accurate near 12 V
-	if voltage > 50 and engineTurnedOver == False: #Increase the count --> use the motorTurnedOver state to verify that the On time is not counted
-		engineOnTimeInSeconds = time.time()
+	if voltage > 50 and engineTurnedOver == False: #Voltage is on engine hasn't started yet
+		engineOnTimeInSeconds = time.time() #determine the time that the engine first turned on
 		engineStartTimeOfDay = datetime.datetime.now() # set the time that the engine started
 		engineTurnedOver = True
-	if voltage < 50 and engineTurnedOver == True: # The motor turned over, but now it is not turning over
+	if voltage < 50 and engineTurnedOver == True: # The motor turned off
 		tempString = createTempString() # Get the current temp string
 		engineTurnedOver = False
 		engineOffTimeInSeconds = time.time()
@@ -122,11 +118,9 @@ def countIfOn():
 		
 		engineStartTimeOfDayString = ('Engine on at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
 		motorRunTime = ('Engine ran for ' + str(formattedMotorRunTime) + ' minutes' + '\n')
-		
 		motorRunMessage = (engineStartTimeOfDayString + motorRunTime + tempString)
 		print (motorRunMessage)
 		sendMessage(motorRunMessage)
-	return count
 
 def sendMessage(messageBody):
 	for number in numbers:
@@ -139,22 +133,19 @@ def sendMessage(messageBody):
 	print(message.sid)
 
 def loop():
-	global startingTime
 	global dayHighTemp
 	global dayLowTemp
-	global testhour
 	global currentHour
 	global beginningOfTheDay
 	while True:
-		countIfOn()
-		currentTemperature = readTemperature()
-		# print (currentHour)
-		dateNow = datetime.datetime.now()
-		currentHour = dateNow.hour
+		countIfOn() # check if engine has turned on
+		currentTemperature = readTemperature() #check the temperature
+		dateNow = datetime.datetime.now() #determine the current data and time
+		currentHour = dateNow.hour #Get the hour to determine need for report
 		for report in reports:		
-			if (currentHour >= report.time and report.reported == False):
+			if (currentHour >= report.time and report.reported == False): #If it's the hour to report and it has not been reported yet
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
-				sendMessage(message) #TODO uncomment for production
+				#sendMessage(message) #TODO uncomment for production
 				print (message)
 				report.reported = True
 				#TODO for testing erase after
