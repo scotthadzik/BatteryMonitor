@@ -147,8 +147,7 @@ def loop():
 		# print (currentHour)
 		dateNow = datetime.datetime.now()
 		currentHour = dateNow.hour
-		for report in reports:
-			print(str(currentHour) + ' hour ' + str(report.time) + ' report time')			
+		for report in reports:		
 			if (currentHour >= report.time and report.reported == False):
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
 				sendMessage(message) #TODO uncomment for production
@@ -157,7 +156,7 @@ def loop():
 				#TODO for testing erase after
 				print ('The current Hour is : ' + str(currentHour))
 				print (report.meridian + ' report ' + 'is ' + str(report.reported))
-		print('report complete')
+		
 		if currentHour == 0:
 			startNewDay(reports)
 
