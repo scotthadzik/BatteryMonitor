@@ -154,7 +154,8 @@ def loop():
 				report.reported = True
 				#TODO for testing erase after
 				print ('The current Hour is : ' + str(currentHour))
-				print (report.meridian + ' report ' + 'is ' + str(report.reported))	
+				print (report.meridian + ' report ' + 'is ' + str(report.reported))
+		print('report complete')
 		if currentHour == 0:
 			startNewDay(reports)
 
