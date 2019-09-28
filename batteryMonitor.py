@@ -86,7 +86,7 @@ def readTemperature():
 	temperaturedata = secondline.split(" ")[9]
 	temperature = float(temperaturedata[2:])
 	temperature = temperature / 1000
-	temperature = (temperature* 9/5) + 32
+	temperature = (temperature* 1.8) + 32
 	if (temperature < dayLowTemp):
 		dayLowTemp = temperature
 	if (temperature > dayHighTemp):
