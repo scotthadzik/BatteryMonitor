@@ -40,6 +40,9 @@ testhour = 8 #TODO this is for testing time
 beginningOfTheDay = True
 
 reports = [
+ReportTime(6,' 6:00 a.m. '),
+ReportTime(7,' 7:00 a.m. '),
+ReportTime(8,' 8:00 a.m. '),
 ReportTime(9,' 9:00 a.m. '),
 ReportTime(10,' 10:00 a.m. '),
 ReportTime(11,' 11:00 a.m. '),
