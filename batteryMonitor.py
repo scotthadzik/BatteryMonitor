@@ -192,7 +192,7 @@ def startNewDay(reports):
 		dayLowTemp = 200
 		dayHighTemp = -50
 		print ('The current Hour is : ' + str(currentHour))
-		print (report.meridian + ' report ' + 'is ' + report.reported)	
+		print (str(report.meridian) + ' report ' + 'is ' + str(report.reported))	
 
 def destroy():
 	ADC.write(0)
