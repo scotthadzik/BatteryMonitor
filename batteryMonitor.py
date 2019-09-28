@@ -145,7 +145,7 @@ def loop():
 		for report in reports:		
 			if (currentHour >= report.time and report.reported == False): #If it's the hour to report and it has not been reported yet
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
-				#sendMessage(message) #TODO uncomment for production
+				sendMessage(message) #TODO uncomment for production
 				print (message)
 				report.reported = True
 				#TODO for testing erase after
