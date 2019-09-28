@@ -141,6 +141,7 @@ def loop():
 	global dayLowTemp
 	global testhour
 	global currentHour
+	global beginningOfTheDay
 	while True:
 		countIfOn()
 		currentTemperature = readTemperature()
