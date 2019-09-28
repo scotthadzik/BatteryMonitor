@@ -139,11 +139,13 @@ def loop():
 	global dayHighTemp
 	global dayLowTemp
 	global index
-	global testhour 
+	global testhour
+	global currentHour
 	while True:
 		countIfOn()
 		currentTemperature = readTemperature()
 		# print (currentHour)
+		dateNow = datetime.datetime.now()
 		currentHour = dateNow.hour
 		for report in reports:
 			print(str(currentHour) + ' hour ' + str(report.time) + ' report time')			
