@@ -42,22 +42,8 @@ beginningOfTheDay = True
 
 reports = [
 ReportTime(6,' 6:00 a.m. '),
-ReportTime(7,' 7:00 a.m. '),
-ReportTime(8,' 8:00 a.m. '),
-ReportTime(9,' 9:00 a.m. '),
-ReportTime(10,' 10:00 a.m. '),
-ReportTime(11,' 11:00 a.m. '),
 ReportTime(12,' 12:00 p.m. '),
-ReportTime(13,' 1:00 p.m. '),
-ReportTime(14,' 2:00 p.m. '),
-ReportTime(15,' 3:00 p.m. '),
-ReportTime(16,' 4:00 p.m. '),
-ReportTime(17,' 5:00 p.m. '),
-ReportTime(18,' 6:00 p.m. '),
-ReportTime(19,' 7:00 p.m. '),
-ReportTime(20,' 8:00 p.m. '),
-ReportTime(21,' 9:00 p.m. '),
-ReportTime(22,' 10:00 p.m. ')
+ReportTime(18,' 6:00 p.m. ')
 ]
 
 
