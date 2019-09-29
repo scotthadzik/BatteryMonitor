@@ -86,7 +86,7 @@ def readTemperature():
 	temperaturedata = secondline.split(" ")[9]
 	temperature = float(temperaturedata[2:])
 	temperature = temperature / 1000
-	temperature = (temperature* 1.8) + 32
+	temperature = (temperature* 1.8) + 32 - 6
 	if (temperature < dayLowTemp):
 		dayLowTemp = temperature
 	if (temperature > dayHighTemp):
@@ -116,8 +116,8 @@ def countIfOn():
 		engineTimeRunningSeconds = (engineOffTimeInSeconds - engineOnTimeInSeconds) / 60
 		formattedMotorRunTime = round(engineTimeRunningSeconds,2)
 		
-		engineStartTimeOfDayString = ('Engine on at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
-		motorRunTime = ('Engine ran for ' + str(formattedMotorRunTime) + ' minutes' + '\n')
+		engineStartTimeOfDayString = ('\nEngine on at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
+		motorRunTime = ('Ran ' + str(formattedMotorRunTime) + ' m.' + '\n')
 		motorRunMessage = (engineStartTimeOfDayString + motorRunTime + tempString)
 		print (motorRunMessage)
 		sendMessage(motorRunMessage)
@@ -169,9 +169,9 @@ def createTempString():
 	formTemp = formatTemperature(temp)
 	formHiTemp = formatTemperature(dayHighTemp)
 	formLowTemp = formatTemperature(dayLowTemp)
-	currentTempString = 'The current temperature is ' + formTemp + '\n'
-	lowTempString = 'The low temp was ' + str(formLowTemp) + '\n'
-	highTempString = 'The high temp was ' + formHiTemp + '\n'
+	currentTempString = 'Current Temp ' + formTemp + '\n'
+	lowTempString = 'Low Temp ' + str(formLowTemp) + '\n'
+	highTempString = 'High Temp ' + formHiTemp + '\n'
 	tempString = (currentTempString + lowTempString + highTempString)
 	return (tempString)
 
