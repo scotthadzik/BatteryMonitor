@@ -12,8 +12,8 @@ import RPi.GPIO as GPIO
 #Twilio Credentials
 auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
-#numbers = [env.TestSMS_Number,env.PrimarySMS_Number,env.SecondarySMS_Number] #TODO uncomment for production
-numbers = [env.TestSMS_Number] #TODO COMMENT FOR PRODUCTION	
+numbers = [env.TestSMS_Number,env.PrimarySMS_Number,env.SecondarySMS_Number] #TODO uncomment for production
+#numbers = [env.TestSMS_Number] #TODO COMMENT FOR PRODUCTION	
 client = Client(account_sid, auth_token)
 
 
@@ -38,11 +38,9 @@ currentHour = dateNow.hour
 dateNow = datetime.datetime.now()
 currentHour = dateNow.hour
 beginningOfTheDay = True
-#currentHour = 8 #TODO this is for testing time
 
 reports = [
 ReportTime(6,' 6:00 a.m. '),
-ReportTime(12,' 12:00 p.m. '),
 ReportTime(18,' 6:00 p.m. ')
 ]
 
@@ -58,7 +56,7 @@ def setup():
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Battery Monitor')
-	# sendMessage('The monitor has started') #TODO remove comment
+	sendMessage('The monitor has started')
 	print ('The monitor has started')
 
 def readTemperature():
@@ -132,7 +130,7 @@ def loop():
 			if (currentHour >= report.time and report.reported == False): #If it's the hour to report and it has not been reported yet
 				report.reported = True
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
-				sendMessage(message) #TODO uncomment for production
+				sendMessage(message) 
 				print (message)
 				
 		if (currentHour == 0 and beginningOfTheDay == True):
