@@ -14,6 +14,24 @@ Run this before running program
 Tutorial for connecting avnet M14A2A board to rasp pi 3
 http://cloudconnectkits.org/sites/default/files/GettingStartedGuide_Pi3_LTE_rv1-3_0_0.pdf
 
+sudo route add default eth1    #This will make all network traffic going through lte device
+
+ifconfig eth1
+ping -I eth1 8.8.8.8
+
+# troubleshoot sim
+minicom –b 115200 –D /dev/ttyACM0
+
+- AT+CSQ
+	- signal quality measured by the modem RSSI and BER
+- AT+CPIN? 
+	- returns ready if modem can read the sim card
+- AT+CREG? 
+	- returns if registered and connected to network
+	- second character 
+		- 1 -> registered on network
+		- 5 -> registered but roaming
+
 M2M Codes
 https://m2msupport.net/m2msupport/atcreg-network-registration/
 
