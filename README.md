@@ -15,10 +15,10 @@ Tutorial for connecting avnet M14A2A board to rasp pi 3
 http://cloudconnectkits.org/sites/default/files/GettingStartedGuide_Pi3_LTE_rv1-3_0_0.pdf
 
 
-#SIM setup
+# SIM setup
 sudo route add default eth1    #This will make all network traffic going through lte device
 
-#Network IP Check
+# Network IP Check
 - ifconfig eth1
 	- Should return an inet 10.x.x.x If the first and second x return 0 sim is not connected to network
 - ping -I eth1 8.8.8.8
