@@ -80,11 +80,6 @@ def readTemperature():
 
 def countIfOn():
 	global engineTurnedOver
-	global engineOnTimeInSeconds
-	global engineOffTimeInSeconds
-	global engineTimeRunningSeconds
-	global dayHighTemp
-	global dayLowTemp
 	global engineOnMessage
 	
 	readAIN0 = ADC.read(0)
@@ -92,28 +87,22 @@ def countIfOn():
 
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and engineTurnedOver == False: #Voltage is on engine hasn't started yet
-		engineOnTimeInSeconds = time.time() #determine the time that the engine first turned on
-		if engineOnMessage == False:
-			engineStartTimeOfDayString = ('\nEngine on at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
-			motorRunMessage = (engineStartTimeOfDayString + tempString)
-			print (motorRunMessage)
-			sendMessage(motorRunMessage)
-		engineStartTimeOfDay = datetime.datetime.now() # set the time that the engine started
 		engineTurnedOver = True
-		engineOnMessage = True
-	if voltage < 50 and engineTurnedOver == True: # The motor turned off
-		tempString = createTempString() # Get the current temp string
-		engineTurnedOver = False
-		engineOnMessage = False
-		engineOffTimeInSeconds = time.time()
-		engineTimeRunningSeconds = (engineOffTimeInSeconds - engineOnTimeInSeconds) / 60
-		formattedMotorRunTime = round(engineTimeRunningSeconds,2)
+		sendMessage(createEngineMessage ("ON"))	
 		
-		engineStartTimeOfDayString = ('\nEngine off at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
-		motorRunTime = ('Ran ' + str(formattedMotorRunTime) + ' m.' + '\n')
-		motorRunMessage = (engineStartTimeOfDayString + motorRunTime + tempString)
-		print (motorRunMessage)
-		sendMessage(motorRunMessage)
+	if voltage < 50 and engineTurnedOver == True: # The engine turned off
+		
+		engineTurnedOver = False
+		sendMessage(createEngineMessage ("OFF"))
+		
+def createEngineMessage(status):
+	tempString = createTempString() # Get the current temp string
+	engineTimeOfDayString = ('\nEngine' + status + ' at ' + engineTimeOfDay.strftime("%I:%M:%S %p") + '\n')
+	engineRunMessage = (engineStartTimeOfDayString + tempString)
+	print (engineRunMessage)
+	return engineRunMessage
+		
+
 
 def sendMessage(messageBody):
 	for number in numbers:
