@@ -12,8 +12,8 @@ import RPi.GPIO as GPIO
 #Twilio Credentials
 auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
-numbers = [env.TestSMS_Number,env.PrimarySMS_Number,env.SecondarySMS_Number] #TODO uncomment for production
-#numbers = [env.TestSMS_Number] #TODO COMMENT FOR PRODUCTION	
+#numbers = [env.TestSMS_Number,env.PrimarySMS_Number,env.SecondarySMS_Number] #TODO uncomment for production
+numbers = [env.TestSMS_Number] #TODO COMMENT FOR PRODUCTION	
 client = Client(account_sid, auth_token)
 
 
@@ -83,16 +83,15 @@ def countIfOn():
 	global engineOnMessage
 	
 	readAIN0 = ADC.read(0)
-	engineStartTimeOfDay = datetime.datetime.now()
 
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and engineTurnedOver == False: #Voltage is on engine hasn't started yet
-		currentTemperature = readTemperature() #check the temperature
+		readTemperature() #check the temperature
 		engineTurnedOver = True
 		sendMessage(createEngineMessage ("ON"))	
 		
 	if voltage < 50 and engineTurnedOver == True: # The engine turned off
-		currentTemperature = readTemperature() #check the temperature
+		readTemperature() #check the temperature
 		engineTurnedOver = False
 		sendMessage(createEngineMessage ("OFF"))
 		
@@ -100,7 +99,7 @@ def createEngineMessage(status):
 	tempString = createTempString() # Get the current temp string
 	engineTimeOfDay = datetime.datetime.now()
 	engineTimeOfDayString = ('\nEngine' + status + ' at ' + engineTimeOfDay.strftime("%I:%M:%S %p") + '\n')
-	engineRunMessage = (engineStartTimeOfDayString + tempString)
+	engineRunMessage = (engineTimeOfDayString + tempString)
 	print (engineRunMessage)
 	return engineRunMessage
 		
