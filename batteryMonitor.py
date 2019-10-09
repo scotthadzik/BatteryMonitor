@@ -28,6 +28,7 @@ engineTurnedOver = False # initial state of the engine
 engineOnTimeInSeconds = time.time()
 engineOffTimeInSeconds = time.time()
 engineTimeRunningSeconds = time.time()
+engineOnMessage = False
 
 #pushbutton -- Currently not used
 pushButton = 36 # BCM16 physical pin 36
@@ -84,6 +85,7 @@ def countIfOn():
 	global engineTimeRunningSeconds
 	global dayHighTemp
 	global dayLowTemp
+	global engineOnMessage
 	
 	readAIN0 = ADC.read(0)
 	engineStartTimeOfDay = datetime.datetime.now()
@@ -91,16 +93,23 @@ def countIfOn():
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and engineTurnedOver == False: #Voltage is on engine hasn't started yet
 		engineOnTimeInSeconds = time.time() #determine the time that the engine first turned on
+		if engineOnMessage == False:
+			engineStartTimeOfDayString = ('\nEngine on at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
+			motorRunMessage = (engineStartTimeOfDayString + tempString)
+			print (motorRunMessage)
+			sendMessage(motorRunMessage)
 		engineStartTimeOfDay = datetime.datetime.now() # set the time that the engine started
 		engineTurnedOver = True
+		engineOnMessage = True
 	if voltage < 50 and engineTurnedOver == True: # The motor turned off
 		tempString = createTempString() # Get the current temp string
 		engineTurnedOver = False
+		engineOnMessage = False
 		engineOffTimeInSeconds = time.time()
 		engineTimeRunningSeconds = (engineOffTimeInSeconds - engineOnTimeInSeconds) / 60
 		formattedMotorRunTime = round(engineTimeRunningSeconds,2)
 		
-		engineStartTimeOfDayString = ('\nEngine on at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
+		engineStartTimeOfDayString = ('\nEngine off at ' + engineStartTimeOfDay.strftime("%I:%M:%S %p") + '\n')
 		motorRunTime = ('Ran ' + str(formattedMotorRunTime) + ' m.' + '\n')
 		motorRunMessage = (engineStartTimeOfDayString + motorRunTime + tempString)
 		print (motorRunMessage)
