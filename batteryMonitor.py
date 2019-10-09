@@ -87,11 +87,12 @@ def countIfOn():
 
 	voltage = readAIN0 # More accurate near 12 V
 	if voltage > 50 and engineTurnedOver == False: #Voltage is on engine hasn't started yet
+		currentTemperature = readTemperature() #check the temperature
 		engineTurnedOver = True
 		sendMessage(createEngineMessage ("ON"))	
 		
 	if voltage < 50 and engineTurnedOver == True: # The engine turned off
-		
+		currentTemperature = readTemperature() #check the temperature
 		engineTurnedOver = False
 		sendMessage(createEngineMessage ("OFF"))
 		
@@ -121,12 +122,12 @@ def loop():
 	global beginningOfTheDay
 	while True:
 		countIfOn() # check if engine has turned on
-		currentTemperature = readTemperature() #check the temperature
 		dateNow = datetime.datetime.now() #determine the current data and time
 		currentHour = dateNow.hour #Get the hour to determine need for report
 		for report in reports:		
 			if (currentHour >= report.time and report.reported == False): #If it's the hour to report and it has not been reported yet
 				report.reported = True
+				currentTemperature = readTemperature() #check the temperature
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
 				sendMessage(message) 
 				print (message)
