@@ -98,6 +98,7 @@ def countIfOn():
 		
 def createEngineMessage(status):
 	tempString = createTempString() # Get the current temp string
+	engineTimeOfDay = datetime.datetime.now()
 	engineTimeOfDayString = ('\nEngine' + status + ' at ' + engineTimeOfDay.strftime("%I:%M:%S %p") + '\n')
 	engineRunMessage = (engineStartTimeOfDayString + tempString)
 	print (engineRunMessage)
