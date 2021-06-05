@@ -85,6 +85,9 @@ def countIfOn():
 	readAIN0 = ADC.read(0)
 
 	voltage = readAIN0 # More accurate near 12 V
+	
+	print (voltage)
+
 	if voltage > 50 and engineTurnedOver == False: #Voltage is on engine hasn't started yet
 		readTemperature() #check the temperature
 		engineTurnedOver = True
@@ -94,6 +97,7 @@ def countIfOn():
 		readTemperature() #check the temperature
 		engineTurnedOver = False
 		sendMessage(createEngineMessage ("OFF"))
+
 		
 def createEngineMessage(status):
 	tempString = createTempString() # Get the current temp string
