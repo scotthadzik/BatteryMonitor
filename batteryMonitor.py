@@ -133,7 +133,7 @@ def loop():
 				report.reported = True
 				currentTemperature = readTemperature() #check the temperature
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
-				sendMessage(message) 
+				# sendMessage(message) #TODO uncomment for production
 				print (message)
 				
 		if (currentHour == 0 and beginningOfTheDay == True):
