@@ -57,7 +57,7 @@ def setup():
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.clear
 	LCD1602.write(0, 0, 'Battery Monitor')
-	sendMessage('The monitor has started')
+	# sendMessage('The monitor has started') #TODO Remove for production
 	print ('The monitor has started')
 
 def readTemperature():
