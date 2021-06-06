@@ -6,9 +6,9 @@ R = LED(12)
 G = LED(13)
 B = LED(6)
 
-R.off()
-G.off()
-B.on()
+R.blink()
+# G.off()
+# B.on()
 
 
 
