@@ -42,9 +42,7 @@ def setColor(col):   # For example : col = 0x112233
 	G_val = map(G_val, 0, 255, 0, 100)
 	B_val = map(B_val, 0, 255, 0, 100)
 	
-	# p_R.ChangeDutyCycle(100-R_val)     # Change duty cycle
-	# p_G.ChangeDutyCycle(100-G_val)
-	# p_B.ChangeDutyCycle(100-B_val)
+	p_R.ChangeDutyCycle(100-R_val) 
 
 def loop():
 	while True:
