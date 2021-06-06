@@ -77,7 +77,7 @@ def setup(R_pin,G_pin,B_pin):
 	p_R.start(0)      # Initial duty Cycle = Turn red on until network detected
 	p_G.start(100)
 	p_B.start(100)
-	
+
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
 			ds18b20 = i
@@ -102,14 +102,25 @@ def networkStatus():
 
 	print (signal_value)
 	if signal_value == 99:
+		p_R.start(0)      # Initial duty Cycle = Turn red on until network detected
+		p_G.start(100)
+		p_B.start(100)
 		return ('offline')
 	elif signal_value < 10:	# evaluate quality of the signal
+		setRGBcolor("yellow")
 		return ('marginal')
 	elif signal_value < 14:
 		return ('OK')
 	else:	
 		return('Good')
 	
+
+def setRGBcolor(color):
+	if color == "yellow":
+		p_R.changeDutyCycle(0)      # Initial duty Cycle = Turn red on until network detected
+		p_G.changeDutyCycle(0)
+		p_B.changeDutyCycle(100)
+
 
 def readTemperature():
 	global dayHighTemp
@@ -197,7 +208,7 @@ def loop():
 				print(networkStatus())
 			else:
 				pressed = False
-			time.sleep(0.1)	
+			time.sleep(0.5)	
 
 
 def createMessageBody(report, temp, hightemp, lowtemp):
