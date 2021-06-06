@@ -1,3 +1,4 @@
+from functools import singledispatch
 import LCD1602
 import PCF8591 as ADC
 import time
@@ -92,10 +93,15 @@ def networkStatus():
 	result=phone.read(100).decode() # read the first 100 char from serial data
 	reg_ex_result = re.compile(r'\d+,\d+') # setup regex
 	numbers = reg_ex_result.findall(result) # search for the first occurance of numbers
-	first_num= numbers[0].split(',') # split the return list based on coma
-	signal_value = int(first_num[0]) # convert the first set of numbers to integer
+	
+	if numbers: # check for a valid number return
+		first_num= numbers[0].split(',') # split the return list based on coma
+		signal_value = int(first_num[0]) # convert the first set of numbers to integer
+	else:
+		signal_value = 99
+
 	print (signal_value)
-	if signal_value == 99 or not numbers:
+	if signal_value == 99:
 		return ('offline')
 	elif signal_value < 10:	# evaluate quality of the signal
 		return ('marginal')
