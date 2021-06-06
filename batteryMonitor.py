@@ -9,6 +9,7 @@ from twilio.rest import Client
 import env as env
 from ReportTime import ReportTime
 import RPi.GPIO as GPIO
+import re
 
 #Twilio Credentials
 auth_token = env.TW_TOKEN
@@ -75,12 +76,10 @@ def setup(R_pin,G_pin,B_pin):
 	p_G = GPIO.PWM(pins['pin_G'], 1999)
 	p_B = GPIO.PWM(pins['pin_B'], 5000)
 	
-	p_R.start(0)      # Initial duty Cycle = 0(leds off)
-	p_G.start(0)
+	p_R.start(0)      # Initial duty Cycle = Turn red on until network detected
+	p_G.start(100)
 	p_B.start(100)
-
-
-
+	networkStatus()
 	
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
@@ -91,13 +90,15 @@ def setup(R_pin,G_pin,B_pin):
 	# sendMessage('The monitor has started') #TODO Remove for production
 	print ('The monitor has started')
 
+	
+
+def networkStatus():
 	phone = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=1.0)
 
 	phone.write(str.encode('AT+CSQ\r\n'))
 	result=phone.read(100)
-	print (result)
-
-
+	print (re.findall("\d",result))
+	
 
 def readTemperature():
 	global dayHighTemp
@@ -129,7 +130,6 @@ def countIfOn():
 		readTemperature() #check the temperature
 		engineTurnedOver = True
 		sendMessage(createEngineMessage ("ON"))	
-		rrredxszcf5rt
 	if voltage < 50 and engineTurnedOver == True: # The engine turned off
 		readTemperature() #check the temperature
 		engineTurnedOver = False
