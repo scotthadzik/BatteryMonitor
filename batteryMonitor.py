@@ -98,6 +98,7 @@ def networkStatus():
 	result=phone.read(100).decode() # read the first 100 char from serial data
 	reg_ex_result = re.compile(r'\d+,\d+') # setup regex
 	matchfound = reg_ex_result.match(result)
+	print (matchfound)
 	if not matchfound: # check for no signal
 		return('no signal')
 	numbers = reg_ex_result.findall(result) # search for the first occurance of numbers
