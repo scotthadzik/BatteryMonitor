@@ -79,7 +79,7 @@ def setup(R_pin,G_pin,B_pin):
 	p_R.start(0)      # Initial duty Cycle = Turn red on until network detected
 	p_G.start(100)
 	p_B.start(100)
-	networkStatus()
+	print(networkStatus())
 	
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
@@ -93,28 +93,22 @@ def setup(R_pin,G_pin,B_pin):
 	
 
 def networkStatus():
-	phone = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=1.0)
-
-	phone.write(str.encode('AT+CSQ\r\n'))
-	result=phone.read(100).decode()
-	print(result)
-	reg_ex_result = re.compile(r'\d+,\d+')
-	numbers = reg_ex_result.findall(result)
-	print (numbers)
-	first_num= numbers[0].split(',')
-	print (first_num[0])
-	signal_value = int(first_num[0])
-	if signal_value < 10:
-		print ('marginal')
+	phone = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=1.0) # Connect with the serial port
+	phone.write(str.encode('AT+CSQ\r\n')) #send AT+CSQ message to queary signal quality
+	result=phone.read(100).decode() # read the first 100 char from serial data
+	reg_ex_result = re.compile(r'\d+,\d+') # setup regex
+	matchfound = reg_ex_result.match(result)
+	if not matchfound: # check for no signal
+		return('no signal')
+	numbers = reg_ex_result.findall(result) # search for the first occurance of numbers
+	first_num= numbers[0].split(',') # split the return list based on coma
+	signal_value = int(first_num[0]) # convert the first set of numbers to integer
+	if signal_value < 10:	# evaluate quality of the signal
+		return ('marginal')
 	elif signal_value < 14:
-		print ('OK')
+		return ('OK')
 	else:	
-		print('Good')
-
-	
-
-
-
+		return('Good')
 	
 
 def readTemperature():
