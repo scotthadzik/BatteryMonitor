@@ -1,6 +1,7 @@
 import LCD1602
 import PCF8591 as ADC
 import time
+import serial
 import datetime
 import os
 import sys
@@ -46,6 +47,8 @@ ReportTime(18,' 6:00 p.m. ')
 ]
 
 
+
+
 def setup():
 	global beginningOfTheDay
 	ADC.setup(0x48)
@@ -59,6 +62,14 @@ def setup():
 	LCD1602.write(0, 0, 'Battery Monitor')
 	# sendMessage('The monitor has started') #TODO Remove for production
 	print ('The monitor has started')
+
+	phone = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=1.0)
+
+	phone.write(str.encode('AT+CSQ\r\n'))
+	result=phone.read(100)
+	print (result)
+
+
 
 def readTemperature():
 	global dayHighTemp
