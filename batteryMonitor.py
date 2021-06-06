@@ -97,6 +97,7 @@ def networkStatus():
 
 	phone.write(str.encode('AT+CSQ\r\n'))
 	result=phone.read(100).decode()
+	print(result)
 	reg_ex_result = re.compile(r'\d+')
 	first_num = reg_ex_result.match(result)
 	print (first_num)
