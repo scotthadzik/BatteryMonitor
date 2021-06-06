@@ -1,6 +1,6 @@
 # #!/usr/bin/env python3
 # from gpiozero import LED
-from time import sleep
+import time
 
 # R = LED(12)
 # G = LED(13)
@@ -22,7 +22,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 GPIO.setup(12, GPIO.OUT)
-while true:
+while True:
 	GPIO.output(12, GPIO.HIGH)
 	time.sleep(1)
 
