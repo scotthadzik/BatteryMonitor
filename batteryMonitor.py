@@ -65,15 +65,6 @@ def setup(R_pin,G_pin,B_pin):
 	GPIO.setup(signal_status_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 	pressed = False
 
-	while True:
-		if GPIO.input(signal_status_button):
-			if not pressed:
-				print ("Button Pressed")
-				pressed = True
-			else:
-				pressed = False
-			time.sleep(0.1)	
-
 	for i in pins:
 		GPIO.setup(pins[i], GPIO.OUT)   # Set pins' mode is output
 		GPIO.output(pins[i], GPIO.HIGH) # Set pins to high(+3.3V) to off led
@@ -197,6 +188,13 @@ def loop():
 			startNewDay(reports)
 		if (currentHour == 1):
 			beginningOfTheDay = True
+		if GPIO.input(signal_status_button):
+			if not pressed:
+				print ("Button Pressed")
+				pressed = True
+			else:
+				pressed = False
+			time.sleep(0.1)	
 
 
 def createMessageBody(report, temp, hightemp, lowtemp):
