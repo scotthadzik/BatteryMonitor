@@ -62,10 +62,11 @@ def setup(R_pin,G_pin,B_pin):
 	global beginningOfTheDay
 	ADC.setup(0x48)
 	global ds18b20
+	
 	global pins
 	global p_R, p_G, p_B
 	pins = {'pin_R': R_pin, 'pin_G': G_pin, 'pin_B': B_pin}
-
+	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
 	for i in pins:
 		GPIO.setup(pins[i], GPIO.OUT)   # Set pins' mode is output
 		GPIO.output(pins[i], GPIO.HIGH) # Set pins to high(+3.3V) to off led
