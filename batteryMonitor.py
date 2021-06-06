@@ -102,16 +102,13 @@ def networkStatus():
 
 	print (signal_value)
 	if signal_value == 99:
-		p_R.start(0)      # Initial duty Cycle = Turn red on until network detected
-		p_G.start(100)
-		p_B.start(100)
+		setRGBcolor("red")
 		return ('offline')
 	elif signal_value < 10:	# evaluate quality of the signal
 		setRGBcolor("yellow")
 		return ('marginal')
-	elif signal_value < 14:
-		return ('OK')
-	else:	
+	else: 
+		setRGBcolor("green")
 		return('Good')
 	
 
@@ -119,6 +116,14 @@ def setRGBcolor(color):
 	if color == "yellow":
 		p_R.ChangeDutyCycle(0)      # Initial duty Cycle = Turn red on until network detected
 		p_G.ChangeDutyCycle(0)
+		p_B.ChangeDutyCycle(100)
+	if color == "green":
+		p_R.ChangeDutyCycle(100)      # Initial duty Cycle = Turn red on until network detected
+		p_G.ChangeDutyCycle(0)
+		p_B.ChangeDutyCycle(100)
+	if color == "red":
+		p_R.ChangeDutyCycle(0)      # Initial duty Cycle = Turn red on until network detected
+		p_G.ChangeDutyCycle(100)
 		p_B.ChangeDutyCycle(100)
 
 
