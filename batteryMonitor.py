@@ -117,9 +117,9 @@ def networkStatus():
 
 def setRGBcolor(color):
 	if color == "yellow":
-		p_R.changeDutyCycle(0)      # Initial duty Cycle = Turn red on until network detected
-		p_G.changeDutyCycle(0)
-		p_B.changeDutyCycle(100)
+		p_R.ChangeDutyCycle(0)      # Initial duty Cycle = Turn red on until network detected
+		p_G.ChangeDutyCycle(0)
+		p_B.ChangeDutyCycle(100)
 
 
 def readTemperature():
