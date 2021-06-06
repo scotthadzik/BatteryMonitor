@@ -101,7 +101,7 @@ def countIfOn():
 		readTemperature() #check the temperature
 		engineTurnedOver = True
 		sendMessage(createEngineMessage ("ON"))	
-		
+		rrredxszcf5rt
 	if voltage < 50 and engineTurnedOver == True: # The engine turned off
 		readTemperature() #check the temperature
 		engineTurnedOver = False
