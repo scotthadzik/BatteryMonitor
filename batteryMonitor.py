@@ -103,6 +103,18 @@ def networkStatus():
 	print (numbers)
 	first_num= numbers[0].split(',')
 	print (first_num[0])
+	signal_value = int(first_num[0])
+	if signal_value < 10:
+		print ('marginal')
+	elif signal_value < 14:
+		print ('OK')
+	else:	
+		print('Good')
+
+	
+
+
+
 	
 
 def readTemperature():
