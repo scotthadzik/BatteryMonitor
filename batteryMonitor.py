@@ -99,7 +99,7 @@ def networkStatus():
 	result=phone.read(100).decode()
 	print(result)
 	reg_ex_result = re.compile(r'\d+')
-	first_num = reg_ex_result.findall(result)
+	first_num = reg_ex_result.finditer(result)
 	print (first_num)
 	
 
