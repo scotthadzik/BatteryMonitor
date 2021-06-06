@@ -2,9 +2,9 @@
 from gpiozero import LED
 from time import sleep
 
-R = LED(32)
-G = LED(33)
-B = LED(31)
+R = LED(12)
+# G = LED(33)
+# B = LED(31)
 
 while True:
     R.on()
