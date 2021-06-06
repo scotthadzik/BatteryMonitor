@@ -171,6 +171,7 @@ def loop():
 	global dayLowTemp
 	global currentHour
 	global beginningOfTheDay
+	global pressed
 	while True:
 		countIfOn() # check if engine has turned on
 		dateNow = datetime.datetime.now() #determine the current data and time
