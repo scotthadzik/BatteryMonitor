@@ -97,7 +97,8 @@ def networkStatus():
 
 	phone.write(str.encode('AT+CSQ\r\n'))
 	result=phone.read(100)
-	print (re.findall("\d",result))
+	first_num = re.findall("\d", result)
+	print (str.first_num)
 	
 
 def readTemperature():
