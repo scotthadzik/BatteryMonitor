@@ -26,5 +26,5 @@ while True:
 	GPIO.output(12, GPIO.HIGH)
 	time.sleep(1)
 
-	GPIO.output(12, GPIO.Low)
+	GPIO.output(12, GPIO.LOW)
 	time.sleep(1)
