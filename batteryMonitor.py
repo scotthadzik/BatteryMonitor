@@ -99,8 +99,10 @@ def networkStatus():
 	result=phone.read(100).decode()
 	print(result)
 	reg_ex_result = re.compile(r'\d+,\d+')
-	first_num = reg_ex_result.findall(result)
-	print (first_num)
+	numbers = reg_ex_result.findall(result)
+	print (numbers)
+	first_num= numbers[0].split(',')
+	print (first_num[0])
 	
 
 def readTemperature():
