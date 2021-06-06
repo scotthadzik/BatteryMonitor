@@ -66,7 +66,7 @@ def setup(R_pin,G_pin,B_pin):
 	pressed = False
 
 	while True:
-		if not GPIO.input(signal_status_button):
+		if GPIO.input(signal_status_button):
 			if not pressed:
 				print ("Button Pressed")
 				pressed = True
