@@ -50,7 +50,7 @@ R_pin = 32
 G_pin = 33
 B_pin = 31
 signal_status_button = 29
-
+pressed = False
 
 def setup(R_pin,G_pin,B_pin):
 	global beginningOfTheDay
@@ -63,7 +63,7 @@ def setup(R_pin,G_pin,B_pin):
 	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
 
 	GPIO.setup(signal_status_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	pressed = False
+
 
 	for i in pins:
 		GPIO.setup(pins[i], GPIO.OUT)   # Set pins' mode is output
