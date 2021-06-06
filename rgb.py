@@ -7,8 +7,8 @@ G = LED(13)
 B = LED(6)
 
 while True:
-    R.on()
-    sleep(1)
+    # R.on()
+    # sleep(1)
     R.off()
     sleep(1)
     G.on()
