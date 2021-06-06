@@ -96,8 +96,6 @@ def countIfOn():
 	readAIN0 = ADC.read(0)
 
 	voltage = readAIN0 # More accurate near 12 V
-	
-	print (voltage)
 
 	if voltage > 50 and engineTurnedOver == False: #Voltage is on engine hasn't started yet
 		readTemperature() #check the temperature
