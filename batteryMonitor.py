@@ -96,7 +96,7 @@ def networkStatus():
 	phone = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=1.0)
 
 	phone.write(str.encode('AT+CSQ\r\n'))
-	result=phone.read(100).decode("ascii")
+	result=phone.read(100).decode()
 	reg_ex_result = re.compile(r'\d+')
 	first_num = reg_ex_result.match(result)
 	print (first_num)
