@@ -58,7 +58,7 @@ B_pin = 31
 
 
 
-def setup():
+def setup(R_pin,G_pin,B_pin):
 	global beginningOfTheDay
 	ADC.setup(0x48)
 	global ds18b20
@@ -213,7 +213,7 @@ def destroy():
 
 if __name__ == "__main__":
 	try:
-		setup()
+		setup(R_pin, G_pin, B_pin)
 		loop()
 	except KeyboardInterrupt:
 		destroy()
