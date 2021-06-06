@@ -30,44 +30,44 @@ def setup(Rpin, Gpin, Bpin):
 	p_G.start(100)
 	p_B.start(100)
 
-def map(x, in_min, in_max, out_min, out_max):
-	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+# def map(x, in_min, in_max, out_min, out_max):
+# 	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
-def off():
-	GPIO.setmode(GPIO.BOARD)
-	for i in pins:
-		GPIO.setup(pins[i], GPIO.OUT)   # Set pins' mode is output
-		GPIO.output(pins[i], GPIO.HIGH)    # Turn off all leds
+# def off():
+# 	GPIO.setmode(GPIO.BOARD)
+# 	for i in pins:
+# 		GPIO.setup(pins[i], GPIO.OUT)   # Set pins' mode is output
+# 		GPIO.output(pins[i], GPIO.HIGH)    # Turn off all leds
 
-def setColor(col):   # For example : col = 0x112233
-	R_val = (col & 0xff0000) >> 16
-	G_val = (col & 0x00ff00) >> 8
-	B_val = (col & 0x0000ff) >> 0
+# def setColor(col):   # For example : col = 0x112233
+# 	R_val = (col & 0xff0000) >> 16
+# 	G_val = (col & 0x00ff00) >> 8
+# 	B_val = (col & 0x0000ff) >> 0
 
-	R_val = map(R_val, 0, 255, 0, 100)
-	G_val = map(G_val, 0, 255, 0, 100)
-	B_val = map(B_val, 0, 255, 0, 100)
+# 	R_val = map(R_val, 0, 255, 0, 100)
+# 	G_val = map(G_val, 0, 255, 0, 100)
+# 	B_val = map(B_val, 0, 255, 0, 100)
 	
-	p_R.ChangeDutyCycle(100-R_val) 
-	p_G.ChangeDutyCycle(100-G_val) 
-	p_B.ChangeDutyCycle(100-B_val) 
+# 	p_R.ChangeDutyCycle(100-R_val) 
+# 	p_G.ChangeDutyCycle(100-G_val) 
+# 	p_B.ChangeDutyCycle(100-B_val) 
 
-def loop():
-	while True:
-		for col in colors:
-			setColor(col)
-			time.sleep(1)
+# def loop():
+# 	while True:
+# 		for col in colors:
+# 			setColor(col)
+# 			time.sleep(1)
 
 def destroy():
 	p_R.stop()
 	p_G.stop()
 	p_B.stop()
-	off()
+	# off()
 	GPIO.cleanup()
 
 if __name__ == "__main__":
 	try:
 		setup(R, G, B)
-		loop()
+		# loop()
 	except KeyboardInterrupt:
 		destroy()

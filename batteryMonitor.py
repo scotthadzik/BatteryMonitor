@@ -17,7 +17,6 @@ account_sid = env.TW_SID
 numbers = [env.TestSMS_Number] #TODO COMMENT FOR PRODUCTION	
 client = Client(account_sid, auth_token)
 
-
 #Temperature Sense
 ds18b20 = ''
 dayLowTemp = 200 # set the initial temperatures to a higher and lower than normal
@@ -47,12 +46,40 @@ ReportTime(18,' 6:00 p.m. ')
 ]
 
 
+# color for network status
+red = 0xFF000
+green = 0x0FF00
+yellow = 0xFFFF00
+
+R_pin = 32
+G_pin = 33
+B_pin = 31
+
+
 
 
 def setup():
 	global beginningOfTheDay
 	ADC.setup(0x48)
 	global ds18b20
+	global pins
+	global p_R, p_G, p_B
+	pins = {'pin_R': R_pin, 'pin_G': G_pin, 'pin_B': B_pin}
+
+	for i in pins:
+		GPIO.setup(pins[i], GPIO.OUT)   # Set pins' mode is output
+		GPIO.output(pins[i], GPIO.HIGH) # Set pins to high(+3.3V) to off led
+	
+	p_R = GPIO.PWM(pins['pin_R'], 2000)  # set Frequece to 2KHz
+	p_G = GPIO.PWM(pins['pin_G'], 1999)
+	p_B = GPIO.PWM(pins['pin_B'], 5000)
+	
+	p_R.start(0)      # Initial duty Cycle = 0(leds off)
+	p_G.start(100)
+	p_B.start(100)
+
+
+
 	
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
