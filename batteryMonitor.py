@@ -76,11 +76,6 @@ def setup(R_pin,G_pin,B_pin):
 	p_R.start(0)      # Initial duty Cycle = Turn red on until network detected
 	p_G.start(100)
 	p_B.start(100)
-
-	
-
-
-	print(networkStatus())
 	
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
@@ -193,6 +188,7 @@ def loop():
 			if not pressed:
 				print ("Button Pressed")
 				pressed = True
+				print(networkStatus())
 			else:
 				pressed = False
 			time.sleep(0.1)	
