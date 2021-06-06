@@ -46,17 +46,10 @@ ReportTime(6,' 6:00 a.m. '),
 ReportTime(18,' 6:00 p.m. ')
 ]
 
-
-# color for network status
-red = 0xFF000
-green = 0x0FF00
-yellow = 0xFFFF00
-
 R_pin = 32
 G_pin = 33
 B_pin = 31
-
-
+signal_status_button = 29
 
 
 def setup(R_pin,G_pin,B_pin):
@@ -68,17 +61,34 @@ def setup(R_pin,G_pin,B_pin):
 	global p_R, p_G, p_B
 	pins = {'pin_R': R_pin, 'pin_G': G_pin, 'pin_B': B_pin}
 	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
+
+	GPIO.setup(signal_status_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	pressed = False
+
+	while True:
+		if not GPIO.input(signal_status_button):
+			if not pressed:
+				print ("Button Pressed")
+				pressed = True
+			else:
+				pressed = False
+			time.sleep(0.1)	
+
 	for i in pins:
 		GPIO.setup(pins[i], GPIO.OUT)   # Set pins' mode is output
 		GPIO.output(pins[i], GPIO.HIGH) # Set pins to high(+3.3V) to off led
-	
 	p_R = GPIO.PWM(pins['pin_R'], 2000)  # set Frequece to 2KHz
 	p_G = GPIO.PWM(pins['pin_G'], 1999)
 	p_B = GPIO.PWM(pins['pin_B'], 5000)
 	
+
 	p_R.start(0)      # Initial duty Cycle = Turn red on until network detected
 	p_G.start(100)
 	p_B.start(100)
+
+	
+
+
 	print(networkStatus())
 	
 	for i in os.listdir('/sys/bus/w1/devices'):
