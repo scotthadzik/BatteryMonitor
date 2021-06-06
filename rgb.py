@@ -1,17 +1,30 @@
-#!/usr/bin/env python3
-from gpiozero import LED
+# #!/usr/bin/env python3
+# from gpiozero import LED
 from time import sleep
 
-R = LED(12)
-G = LED(13)
-B = LED(6)
+# R = LED(12)
+# G = LED(13)
+# B = LED(6)
 
-R.blink()
-# G.off()
-# B.on()
+# R.blink()
+# # G.off()
+# # B.on()
 
 
 
-while True:
+# while True:
     
-	B.blink()
+# 	B.blink()
+
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+GPIO.setup(12, GPIO.OUT)
+while true:
+	GPIO.output(12, GPIO.HIGH)
+	time.sleep(1)
+
+	GPIO.output(12, GPIO.Low)
+	time.sleep(1)
