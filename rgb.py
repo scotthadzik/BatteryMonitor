@@ -3,8 +3,14 @@ import RPi.GPIO as GPIO
 import time
 
 colors = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF, 0x00FFFF]
-R = 33
-G = 32
+
+# Button pin 5
+# Pin 6 Blue  31 
+# Pin 12 R 32
+# Pin 13 G 33
+
+R = 32
+G = 33
 B = 31
 
 def setup(Rpin, Gpin, Bpin):
