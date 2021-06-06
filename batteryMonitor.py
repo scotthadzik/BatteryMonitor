@@ -76,7 +76,7 @@ def setup(R_pin,G_pin,B_pin):
 	p_B = GPIO.PWM(pins['pin_B'], 5000)
 	
 	p_R.start(0)      # Initial duty Cycle = 0(leds off)
-	p_G.start(100)
+	p_G.start(0)
 	p_B.start(100)
 
 
