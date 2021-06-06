@@ -95,7 +95,7 @@ def networkStatus():
 	first_num= numbers[0].split(',') # split the return list based on coma
 	signal_value = int(first_num[0]) # convert the first set of numbers to integer
 	print (signal_value)
-	if signal_value == 99:
+	if signal_value == 99 or not numbers:
 		return ('offline')
 	elif signal_value < 10:	# evaluate quality of the signal
 		return ('marginal')
