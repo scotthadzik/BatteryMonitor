@@ -92,12 +92,16 @@ def networkStatus():
 		return('good')
 	
 def reportSignal(signal):
+	LCD1602.clear
 	if signal == "offline":
-		LCD1602.write(0,1, 'Net: offline')
+		print('write to LCD')
+		LCD1602.write(0,0, 'Net: offline')
 	if signal == "marginal":
-		LCD1602.write(0,1, 'Net: marginal')
+		print('write to LCD')
+		LCD1602.write(0,0, 'Net: marginal')
 	if signal == "Good":
-		LCD1602.write(0,1, 'Net: Good')
+		print('write to LCD')
+		LCD1602.write(0,0, 'Net: Good')
 
 def readTemperature():
 	global dayHighTemp
