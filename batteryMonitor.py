@@ -34,9 +34,10 @@ engineTimeRunningSeconds = time.time()
 engineOnMessage = False
 
 #pushbutton -- Currently not used
-pushButton = 16 # BCM16 physical pin 36
+signal_status_button = Button(16) # BCM16 physical pin 36
 red_led = LED(12)
 green_led = LED(13)
+pressed = False
 
 #date and time
 dateNow = datetime.datetime.now()
@@ -50,14 +51,10 @@ ReportTime(6,' 6:00 a.m. '),
 ReportTime(18,' 6:00 p.m. ')
 ]
 
-signal_status_button = 29
-pressed = False
-
 def setup():
 	global beginningOfTheDay
 	ADC.setup(0x48)
 	global ds18b20
-	GPIO.setup(signal_status_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
@@ -189,14 +186,17 @@ def loop():
 			startNewDay(reports)
 		if (currentHour == 1):
 			beginningOfTheDay = True
-		if GPIO.input(signal_status_button):
-			if not pressed:
-				print ("Button Pressed")
-				pressed = True
-				print(networkStatus())
-			else:
-				pressed = False
-			time.sleep(2)	
+		
+		signal_status_button.when_pressed = networkStatus()
+		
+		# if GPIO.input(signal_status_button):
+		# 	if not pressed:
+		# 		print ("Button Pressed")
+		# 		pressed = True
+		# 		print(networkStatus())
+		# 	else:
+		# 		pressed = False
+		# 	time.sleep(2)	
 
 
 def createMessageBody(report, temp, hightemp, lowtemp):
