@@ -82,13 +82,13 @@ def networkStatus():
 
 	print (signal_value)
 	if signal_value == 99:
-		# reportSignal("offline")
+		reportSignal("offline")
 		return ('offline')
 	elif signal_value < 10:	# evaluate quality of the signal
-		# reportSignal("marginal")
+		reportSignal("marginal")
 		return ('marginal')
 	else: 
-		# reportSignal("good")
+		reportSignal("good")
 		return('good')
 	
 def reportSignal(signal):
