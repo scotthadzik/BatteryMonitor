@@ -78,6 +78,7 @@ def networkStatus():
 		signal_value = int(first_num[0]) # convert the first set of numbers to integer
 	else:
 		signal_value = 99
+		return ('offline')
 
 	print (signal_value)
 	if signal_value == 99:
@@ -90,13 +91,13 @@ def networkStatus():
 		# reportSignal("good")
 		return('good')
 	
-# def reportSignal(signal):
-# 	if signal == "offline":
-# 		LCD1602.write(0,1, 'Net: offline')
-# 	if signal == "marginal":
-# 		LCD1602.write(0,1, 'Net: marginal')
-# 	if signal == "Good":
-# 		LCD1602.write(0,1, 'Net: Good')
+def reportSignal(signal):
+	if signal == "offline":
+		LCD1602.write(0,1, 'Net: offline')
+	if signal == "marginal":
+		LCD1602.write(0,1, 'Net: marginal')
+	if signal == "Good":
+		LCD1602.write(0,1, 'Net: Good')
 
 def readTemperature():
 	global dayHighTemp
