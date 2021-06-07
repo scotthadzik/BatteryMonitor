@@ -34,7 +34,7 @@ engineTimeRunningSeconds = time.time()
 engineOnMessage = False
 
 #pushbutton -- Currently not used
-pushButton = 36 # BCM16 physical pin 36
+pushButton = 16 # BCM16 physical pin 36
 red_led = LED(12)
 green_led = LED(13)
 
@@ -57,7 +57,6 @@ def setup():
 	global beginningOfTheDay
 	ADC.setup(0x48)
 	global ds18b20
-	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
 	GPIO.setup(signal_status_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 	for i in os.listdir('/sys/bus/w1/devices'):
