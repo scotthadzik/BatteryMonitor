@@ -34,9 +34,13 @@ engineTimeRunningSeconds = time.time()
 engineOnMessage = False
 
 #pushbutton -- Currently not used
-signal_status_button = Button(16) # BCM16 physical pin 36
+signal_status_button = Button(5) # BCM16 physical pin 36
 red_led = LED(12)
 green_led = LED(13)
+blue_led = LED(6)
+red_led.off()
+green_led.off()
+blue_led.off()
 pressed = False
 
 #date and time
