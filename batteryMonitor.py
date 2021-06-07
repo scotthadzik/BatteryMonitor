@@ -35,8 +35,8 @@ engineOnMessage = False
 
 #pushbutton -- Currently not used
 pushButton = 36 # BCM16 physical pin 36
-red_led = 12
-green_led = 13
+red_led = LED(12)
+green_led = LED(13)
 
 #date and time
 dateNow = datetime.datetime.now()
