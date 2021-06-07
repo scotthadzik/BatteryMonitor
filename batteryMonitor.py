@@ -103,7 +103,7 @@ def reportSignal(signal):
 	if signal == "marginal":
 		print('write to LCD')
 		LCD1602.write(0,0, 'Net: marginal')
-	if signal == "Good":
+	if signal == "good":
 		print('write to LCD')
 		LCD1602.write(0,0, 'Net: Good')
 
