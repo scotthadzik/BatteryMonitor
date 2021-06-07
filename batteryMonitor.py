@@ -47,9 +47,6 @@ ReportTime(6,' 6:00 a.m. '),
 ReportTime(18,' 6:00 p.m. ')
 ]
 
-R_pin = 32
-G_pin = 33
-B_pin = 31
 signal_status_button = 29
 pressed = False
 
@@ -57,26 +54,8 @@ def setup(R_pin,G_pin,B_pin):
 	global beginningOfTheDay
 	ADC.setup(0x48)
 	global ds18b20
-	
-	global pins
-	global p_R, p_G, p_B
-	pins = {'pin_R': R_pin, 'pin_G': G_pin, 'pin_B': B_pin}
 	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
-
 	GPIO.setup(signal_status_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-
-	for i in pins:
-		GPIO.setup(pins[i], GPIO.OUT)   # Set pins' mode is output
-		GPIO.output(pins[i], GPIO.HIGH) # Set pins to high(+3.3V) to off led
-	p_R = GPIO.PWM(pins['pin_R'], 2000)  # set Frequece to 2KHz
-	p_G = GPIO.PWM(pins['pin_G'], 1999)
-	p_B = GPIO.PWM(pins['pin_B'], 5000)
-	
-
-	p_R.start(0)      # Initial duty Cycle = Turn red on until network detected
-	p_G.start(100)
-	p_B.start(100)
 
 	for i in os.listdir('/sys/bus/w1/devices'):
 		if i != 'w1_bus_master1':
@@ -102,30 +81,22 @@ def networkStatus():
 
 	print (signal_value)
 	if signal_value == 99:
-		setRGBcolor("red")
+		# reportSignal("offline")
 		return ('offline')
 	elif signal_value < 10:	# evaluate quality of the signal
-		setRGBcolor("yellow")
+		# reportSignal("marginal")
 		return ('marginal')
 	else: 
-		setRGBcolor("green")
-		return('Good')
+		# reportSignal("good")
+		return('good')
 	
-
-def setRGBcolor(color):
-	if color == "yellow":
-		p_R.ChangeDutyCycle(0)      # Initial duty Cycle = Turn red on until network detected
-		p_G.ChangeDutyCycle(0)
-		p_B.ChangeDutyCycle(100)
-	if color == "green":
-		p_R.ChangeDutyCycle(100)      # Initial duty Cycle = Turn red on until network detected
-		p_G.ChangeDutyCycle(0)
-		p_B.ChangeDutyCycle(100)
-	if color == "red":
-		p_R.ChangeDutyCycle(0)      # Initial duty Cycle = Turn red on until network detected
-		p_G.ChangeDutyCycle(100)
-		p_B.ChangeDutyCycle(100)
-
+# def reportSignal(signal):
+# 	if signal == "offline":
+# 		LCD1602.write(0,1, 'Net: offline')
+# 	if signal == "marginal":
+# 		LCD1602.write(0,1, 'Net: marginal')
+# 	if signal == "Good":
+# 		LCD1602.write(0,1, 'Net: Good')
 
 def readTemperature():
 	global dayHighTemp
