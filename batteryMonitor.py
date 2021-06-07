@@ -221,7 +221,7 @@ def destroy():
 
 if __name__ == "__main__":
 	try:
-		setup(R_pin, G_pin, B_pin)
+		setup()
 		loop()
 	except KeyboardInterrupt:
 		destroy()
