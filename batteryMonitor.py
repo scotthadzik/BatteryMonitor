@@ -38,9 +38,9 @@ signal_status_button = Button(5) # BCM16 physical pin 36
 red_led = LED(12)
 green_led = LED(13)
 blue_led = LED(6)
-red_led.off()
-green_led.off()
-blue_led.off()
+red_led.on()
+green_led.on()
+blue_led.on()
 pressed = False
 
 #date and time
@@ -100,16 +100,19 @@ def reportSignal(signal):
 	# LCD1602.clear
 	if signal == "offline":
 		print('offline')
-		red_led.on()
-		green_led.off()
+		red_led.off()
+		green_led.on()
+		blue_led.on()
 	if signal == "marginal":
 		print('marginal')
 		red_led.off()
 		green_led.off()
+		blue_led.on()
 	if signal == "good":
 		print('good')
 		red_led.on()
 		green_led.off()
+		blue_led.on()
 
 def readTemperature():
 	global dayHighTemp
