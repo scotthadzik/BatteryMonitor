@@ -187,7 +187,7 @@ def loop():
 		if (currentHour == 1):
 			beginningOfTheDay = True
 		
-		signal_status_button.when_pressed = networkStatus()
+		signal_status_button.when_pressed = networkStatus
 		
 		# if GPIO.input(signal_status_button):
 		# 	if not pressed:
