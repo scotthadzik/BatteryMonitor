@@ -81,22 +81,22 @@ def networkStatus():
 
 	print (signal_value)
 	if signal_value == 99:
-		reportSignal("offline")
+		# reportSignal("offline")
 		return ('offline')
 	elif signal_value < 10:	# evaluate quality of the signal
-		reportSignal("marginal")
+		# reportSignal("marginal")
 		return ('marginal')
 	else: 
-		reportSignal("good")
+		# reportSignal("good")
 		return('good')
 	
-def reportSignal(signal):
-	if signal == "offline":
-		LCD1602.write(0,1, 'Net: offline')
-	if signal == "marginal":
-		LCD1602.write(0,1, 'Net: marginal')
-	if signal == "Good":
-		LCD1602.write(0,1, 'Net: Good')
+# def reportSignal(signal):
+# 	if signal == "offline":
+# 		LCD1602.write(0,1, 'Net: offline')
+# 	if signal == "marginal":
+# 		LCD1602.write(0,1, 'Net: marginal')
+# 	if signal == "Good":
+# 		LCD1602.write(0,1, 'Net: Good')
 
 def readTemperature():
 	global dayHighTemp
