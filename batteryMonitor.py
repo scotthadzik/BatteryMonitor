@@ -11,6 +11,7 @@ import env as env
 from ReportTime import ReportTime
 import RPi.GPIO as GPIO
 import re
+from gpiozero import LED, Button
 
 #Twilio Credentials
 auth_token = env.TW_TOKEN
@@ -34,6 +35,8 @@ engineOnMessage = False
 
 #pushbutton -- Currently not used
 pushButton = 36 # BCM16 physical pin 36
+red_led = 12
+green_led = 13
 
 #date and time
 dateNow = datetime.datetime.now()
@@ -79,8 +82,6 @@ def networkStatus():
 	else:
 		signal_value = 99
 		return ('offline')
-
-	print (signal_value)
 	if signal_value == 99:
 		reportSignal("offline")
 		return ('offline')
@@ -92,20 +93,23 @@ def networkStatus():
 		return('good')
 	
 def reportSignal(signal):
-	for i in os.listdir('/sys/bus/w1/devices'):
-		if i != 'w1_bus_master1':
-			ds18b20 = i
-	LCD1602.init(0x27, 1)	# init(slave address, background light)
-	LCD1602.clear
+	# for i in os.listdir('/sys/bus/w1/devices'):
+	# 	if i != 'w1_bus_master1':
+	# 		ds18b20 = i
+	# LCD1602.init(0x27, 1)	# init(slave address, background light)
+	# LCD1602.clear
 	if signal == "offline":
-		print('write to LCD')
-		LCD1602.write(0,0, 'Net: offline')
+		print('offline')
+		red_led.on()
+		green_led.off()
 	if signal == "marginal":
-		print('write to LCD')
-		LCD1602.write(0,0, 'Net: marginal')
+		print('marginal')
+		red_led.off()
+		green_led.off()
 	if signal == "good":
-		print('write to LCD')
-		LCD1602.write(0,0, 'Net: Good')
+		print('good')
+		red_led.on()
+		green_led.off()
 
 def readTemperature():
 	global dayHighTemp
