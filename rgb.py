@@ -15,16 +15,19 @@ import time
 # while True:
     
 # 	B.blink()
+rpin = 6
 
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-GPIO.setup(12, GPIO.OUT)
+GPIO.setup(rpin, GPIO.OUT)
 while True:
-	GPIO.output(12, GPIO.HIGH)
+	GPIO.output(rpin, GPIO.HIGH)
 	time.sleep(1)
+	print('off')	
 
-	GPIO.output(12, GPIO.LOW)
+	GPIO.output(rpin, GPIO.LOW)
 	time.sleep(1)
+	print('on')
