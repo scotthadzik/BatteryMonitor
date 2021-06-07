@@ -69,7 +69,7 @@ def setup():
 	print ('The monitor has started')
 
 def networkStatus():
-	phone = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=1.0) # Connect with the serial port
+	phone = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=2.0) # Connect with the serial port
 	phone.write(str.encode('AT+CSQ\r\n')) #send AT+CSQ message to queary signal quality
 	result=phone.read(100).decode() # read the first 100 char from serial data
 	reg_ex_result = re.compile(r'\d+,\d+') # setup regex
@@ -196,7 +196,7 @@ def loop():
 				print(networkStatus())
 			else:
 				pressed = False
-			time.sleep(0.5)	
+			time.sleep(2)	
 
 
 def createMessageBody(report, temp, hightemp, lowtemp):
