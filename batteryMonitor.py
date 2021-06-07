@@ -60,9 +60,9 @@ def setup():
 	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
 	GPIO.setup(signal_status_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-	# for i in os.listdir('/sys/bus/w1/devices'):
-	# 	if i != 'w1_bus_master1':
-	# 		ds18b20 = i
+	for i in os.listdir('/sys/bus/w1/devices'):
+		if i != 'w1_bus_master1':
+			ds18b20 = i
 	# LCD1602.init(0x27, 1)	# init(slave address, background light)
 	# LCD1602.clear
 	# LCD1602.write(0, 0, 'Battery Monitor')
