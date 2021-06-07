@@ -50,7 +50,7 @@ ReportTime(18,' 6:00 p.m. ')
 signal_status_button = 29
 pressed = False
 
-def setup(R_pin,G_pin,B_pin):
+def setup():
 	global beginningOfTheDay
 	ADC.setup(0x48)
 	global ds18b20
