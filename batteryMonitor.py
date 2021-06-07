@@ -58,13 +58,13 @@ ReportTime(18,' 6:00 p.m. ')
 def setup():
 	global beginningOfTheDay
 	ADC.setup(0x48)
-	global ds18b20
+	global ds18b20 # interior digital temperature sensor
 
-	for i in os.listdir('/sys/bus/w1/devices'):
+	for i in os.listdir('/sys/bus/w1/devices'): # setup digital temperature sensor
 		if i != 'w1_bus_master1':
 			ds18b20 = i
 	# LCD1602.init(0x27, 1)	# init(slave address, background light)
-	# LCD1602.clear
+	# LCD1602.clearjopui
 	# LCD1602.write(0, 0, 'Battery Monitor')
 	# sendMessage('The monitor has started') #TODO Remove for production
 	print ('The monitor has started')
@@ -113,6 +113,7 @@ def reportSignal(signal):
 		red_led.on()
 		green_led.off()
 		blue_led.on()
+	time.sleep(3)
 
 def readTemperature():
 	global dayHighTemp
@@ -148,7 +149,6 @@ def countIfOn():
 		readTemperature() #check the temperature
 		engineTurnedOver = False
 		sendMessage(createEngineMessage ("OFF"))
-
 		
 def createEngineMessage(status):
 	tempString = createTempString() # Get the current temp string
@@ -158,8 +158,6 @@ def createEngineMessage(status):
 	print (engineRunMessage)
 	return engineRunMessage
 		
-
-
 def sendMessage(messageBody):
 	for number in numbers:
 		message = client.messages \
