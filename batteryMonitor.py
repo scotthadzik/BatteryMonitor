@@ -200,15 +200,6 @@ def loop():
 			beginningOfTheDay = True
 		
 		signal_status_button.when_pressed = networkStatus
-		
-		# if GPIO.input(signal_status_button):
-		# 	if not pressed:
-		# 		print ("Button Pressed")
-		# 		pressed = True
-		# 		print(networkStatus())
-		# 	else:
-		# 		pressed = False
-		# 	time.sleep(2)	
 
 
 def createMessageBody(report, temp, hightemp, lowtemp):
