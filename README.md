@@ -53,3 +53,9 @@ https://os.mbed.com/platforms/FRDM-K64F/#technical-doc
 ##sms bot with NGrok https://makezine.com/projects/sms-bot/
 
 ## remote temp monitor https://hackmypi.com/RemoteTemperatureMonitoring.php
+
+# logs
+- journalctl -b --> last boot log
+- journalctl -k --> kernel logging
+- journalctl -f --> get continuous showing log
+- logs stored in /var/log/journal
