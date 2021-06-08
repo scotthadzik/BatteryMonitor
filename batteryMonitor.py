@@ -16,8 +16,8 @@ from gpiozero import LED, Button
 #Twilio Credentials
 auth_token = env.TW_TOKEN
 account_sid = env.TW_SID
-#numbers = [env.TestSMS_Number,env.PrimarySMS_Number,env.SecondarySMS_Number] #TODO uncomment for production
-numbers = [env.TestSMS_Number] #TODO COMMENT FOR PRODUCTION	
+numbers = [env.TestSMS_Number,env.PrimarySMS_Number,env.SecondarySMS_Number] #TODO uncomment for production
+#numbers = [env.TestSMS_Number] #TODO COMMENT FOR PRODUCTION	
 client = Client(account_sid, auth_token)
 
 #Temperature Sense
@@ -190,7 +190,7 @@ def loop():
 				report.reported = True
 				currentTemperature = readTemperature() #check the temperature
 				message = createMessageBody(report, currentTemperature, dayHighTemp, dayLowTemp)
-				# sendMessage(message) #TODO uncomment for production
+				sendMessage(message) #TODO uncomment for production
 				print (message)
 				
 		if (currentHour == 0 and beginningOfTheDay == True):
