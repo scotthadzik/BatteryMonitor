@@ -98,6 +98,7 @@ def reportSignal(signal):
 	# 		ds18b20 = i
 	# LCD1602.init(0x27, 1)	# init(slave address, background light)
 	# LCD1602.clear
+	print('signal:' + signal)
 	if signal == "offline":
 		print('offline')
 		red_led.off()
