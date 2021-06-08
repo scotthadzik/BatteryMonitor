@@ -118,6 +118,7 @@ def reportSignal(signal):
 	red_led.on()
 	green_led.on()
 	blue_led.on()
+	print('LED Off')
 
 def readTemperature():
 	global dayHighTemp
