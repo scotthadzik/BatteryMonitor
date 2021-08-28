@@ -59,3 +59,6 @@ https://os.mbed.com/platforms/FRDM-K64F/#technical-doc
 - journalctl -k --> kernel logging
 - journalctl -f --> get continuous showing log
 - logs stored in /var/log/journal
+
+
+https://medium.com/@KyleARector/logmein-hamachi-on-raspberry-pi-ad2ba3619f3a
