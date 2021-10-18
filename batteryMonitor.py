@@ -66,8 +66,8 @@ def setup():
 	# LCD1602.init(0x27, 1)	# init(slave address, background light)
 	# LCD1602.clearjopui
 	# LCD1602.write(0, 0, 'Battery Monitor')
-	if (networkStatus() == 'offline'):
-		setup()
+	# if (networkStatus() == 'offline'):
+		# setup()
 	sendMessage('The monitor has started')
 	print ('The monitor has started')
 
@@ -199,7 +199,7 @@ def loop():
 		if (currentHour == 1):
 			beginningOfTheDay = True
 		
-		signal_status_button.when_pressed = networkStatus
+		# signal_status_button.when_pressed = networkStatus
 
 
 def createMessageBody(report, temp, hightemp, lowtemp):
