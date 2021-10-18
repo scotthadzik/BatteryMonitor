@@ -2,7 +2,6 @@ from functools import singledispatch
 import LCD1602
 import PCF8591 as ADC
 import time
-import serial
 import datetime
 import os
 import sys
@@ -70,57 +69,7 @@ def setup():
 		# setup()
 	sendMessage('The monitor has started')
 	print ('The monitor has started')
-
-def networkStatus():
-	phone = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=2.0) # Connect with the serial port
-	phone.write(str.encode('AT+CSQ\r\n')) #send AT+CSQ message to queary signal quality
-	result=phone.read(100).decode() # read the first 100 char from serial data
-	reg_ex_result = re.compile(r'\d+,\d+') # setup regex
-	numbers = reg_ex_result.findall(result) # search for the first occurance of numbers
 	
-	if numbers: # check for a valid number return
-		first_num= numbers[0].split(',') # split the return list based on coma
-		signal_value = int(first_num[0]) # convert the first set of numbers to integer
-	else:
-		signal_value = 99
-		return ('offline')
-	if signal_value == 99:
-		reportSignal("offline")
-		return ('offline')
-	elif signal_value < 10:	# evaluate quality of the signal
-		reportSignal("marginal")
-		return ('marginal')
-	else: 
-		reportSignal("good")
-		return('good')
-	
-def reportSignal(signal):
-	# for i in os.listdir('/sys/bus/w1/devices'):
-	# 	if i != 'w1_bus_master1':
-	# 		ds18b20 = i
-	# LCD1602.init(0x27, 1)	# init(slave address, background light)
-	# LCD1602.clear
-	print('signal:' + signal)
-	if signal == "offline":
-		print('offline')
-		red_led.off()
-		green_led.on()
-		blue_led.on()
-	if signal == "marginal":
-		print('marginal')
-		red_led.off()
-		green_led.off()
-		blue_led.on()
-	if signal == "good":
-		print('good')
-		red_led.on()
-		green_led.off()
-		blue_led.on()
-	time.sleep(10)
-	red_led.on()
-	green_led.on()
-	blue_led.on()
-	print('LED Off')
 
 def readTemperature():
 	global dayHighTemp
@@ -198,8 +147,6 @@ def loop():
 			startNewDay(reports)
 		if (currentHour == 1):
 			beginningOfTheDay = True
-		
-		# signal_status_button.when_pressed = networkStatus
 
 
 def createMessageBody(report, temp, hightemp, lowtemp):
